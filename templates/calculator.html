@@ -91,7 +91,7 @@
   let pickUp = document.getElementById('pickUp').checked;
   let delivery = document.getElementById('delivery').checked;
 
-  json = cityfrom + cityto + quantity + weight + volume + pickUp + delivery;
+  json = cityfrom + "/" + cityto + "/" + quantity + "/" + weight + "/" + volume + "/" + pickUp + "/" + delivery;
 
   /*if (cityfrom != '' && cityto != '' && quantity != '' && weight != '' && volume != ''){
     req.onload = function() {

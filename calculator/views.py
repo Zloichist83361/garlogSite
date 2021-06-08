@@ -8,8 +8,9 @@ import json
 # Create your views here.
 
 def calc(req):
+
     dataPrice = list(Calculate.objects.values())
-    responsePrice =  json.dumps(dataPrice)
+    responsePrice = json.dumps(dataPrice)
 
     dataTerm = list(Term.objects.values())
     responseTerm = json.dumps(dataTerm)
@@ -19,4 +20,5 @@ def calc(req):
         'responsePrice': responsePrice,
         'responseTerm': responseTerm,
     }
+
     return render(req, 'calculator.html', context)
