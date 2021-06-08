@@ -1,0 +1,29 @@
+{% extends 'shared/base.html' %} 
+
+{% load static %}
+
+
+{% block base_content %}  
+
+<link rel="stylesheet" href="{% static '/css/tracking.css' %}">
+
+<form  action="{% url 'search' %}" method="get">
+<section class="tracking-section">
+    <h4 class="mb-4 text-center text-uppercase subtitle" style="margin-top: 55px;">Местонахождение и информация по грузу</h4>
+    <div class="track-input">
+        <input id="tracking-input" name="q" class="tracking-input" type="text" placeholder="Введите номер заказа или накладной 123456789123g">
+    </div>
+    <input type="submit" id="check-input" class="bttn btn-wrap" value="Проверить">
+    <div class="container-status">
+        {% for my_object in object_list %}
+        <span class="" id="status_1">№ заказа\накладной {{ my_object.tracking_number }}</span>
+        <span class="" id="status_2">Статус груза: {{ my_object.status }}</span>
+        <span class="" id="status_3">Дата доставки: {{my_object.delivery_date }}</span>
+        <span class="" id="status_4">Статус оплаты: {{my_object.status_pay }}</span>
+        <span class="" id="status_5">Направление: {{my_object.route }}</span>
+        {% endfor %}
+    </div>
+</section>
+</form
+
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends "shared/base.html" %} 
+{% load static %}
+
+
+
+
+{% block base_content %}
+
+
+<h4 class="mb-4 text-center text-uppercase subtitle" style="margin-top: 55px;">Калькулятор</h4>
+<div class="container">
+    <div class="jumbotron">
+    <form>
+        <div class="row mb-3">
+            <div class="form-group col-md-6 col-sm-6">
+                <p class="">Откуда</p>
+                <input type="text" class="form-control" id="cityfrom" required="" />
+            </div>
+            <div class="form-group col-md-6 col-sm-6">
+                <p class="">Куда</p>
+                <input type="text" class="form-control"  id="cityto" required=""/>
+            </div>
+            <div class="form-group col-md-4 col-sm-6">
+                <p class="">Кол-во мест</p>
+                <input type="text"  class="form-control" id="quantity" required=""  />
+            </div>
+            <div class="form-group col-md-4 col-sm-6">
+                <p class="">Вес груза</p>
+                <input type="text" class="form-control" id="weight" required=""  />
+            </div>
+            <div class="form-group col-md-4 col-sm-6">
+                <p class="">Объем</p>
+                <input type="text"  class="form-control" id="volume" required=""/>
+            </div>
+            
+            <div class="custom-control custom-checkbox">
+            <div class="form-group form-check" style="visibility: visible;">
+                <input type="checkbox" id="pickUp"  class="custom-control-input"/>
+                <label class="custom-control-label" for="pickUp">Необходимо забрать груз с адреса</label>
+            </div>
+            <div class="form-group form-check" style="visibility: visible;">
+                <input type="checkbox" id="delivery"  class="custom-control-input"/>
+                <label class="custom-control-label" for="delivery">Необходимо доставить груз до адреса</label>
+            </div>
+            </div>
+
+            <table class="table">
+                <thead> 
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Стоимость</th>
+                    <th scope="col">Срок</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Стандарт</th>
+                    <td id="standartCost"></td>
+                    <td id="standartTerm"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Экспресс</th>
+                    <td id="expressCost"></td>
+                    <td id="expressTerm"></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <div class="col-md-12 col-12 ">
+                <input type="button" style="background-color: #3D3935; border-color: #3D3935;"  id="btn" class="btn btn-primary btn-lg btn-block" value="Рассчитать"/>
+              </div>
+            </div>
+              <div class="row mb-3">
+              <div class="col-md-12 col-12 ">
+               <a href="/order/" style="visibility: hidden;" target="_blank"> <input type="button" style="background-color: #3D3935; border-color: #3D3935;"  id="orderBtn" class="btn btn-primary btn-lg btn-block" value="Оформить заявку"/> </a>
+              </div>
+            </div>
+
+        
+    </form>
+    </div>
+</div>
+<script>
+
+  let req = new XMLHttpRequest();
+  let cityfrom = document.getElementById('cityfrom').value;
+  let cityto = document.getElementById('cityto').value;
+  let quantity = document.getElementById('quantity').value;
+  let weight = document.getElementById('weight').value;
+  let volume = document.getElementById('volume').value;
+  let pickUp = document.getElementById('pickUp').checked;
+  let delivery = document.getElementById('delivery').checked;
+
+  json = cityfrom + cityto + quantity + weight + volume + pickUp + delivery;
+
+  /*if (cityfrom != '' && cityto != '' && quantity != '' && weight != '' && volume != ''){
+    req.onload = function() {
+
+      let response = JSON.parse(this.responseText);
+      if (response.inter_terminal && response.)
+    }
+  }*/
+
+  let btn = document.getElementById('btn');
+  let standartCost = document.getElementById('standartCost');
+  let standartTerm = document.getElementById('standartTerm');
+  let expressCost = document.getElementById('expressCost');
+  let expressTerm = document.getElementById('expressTerm');
+  let orderButton = document.getElementById('orderBtn');
+
+  btn.addEventListener("click", () => {
+    standartCost.innerHTML = 300;
+    standartTerm.innerHTML = 1 + '-' + 3;
+    expressCost.innerHTML = 400;
+    expressTerm.innerHTML = 1 ;
+
+    orderButton.classList.add("reveal");
+  });
+</script>
+<style>
+  .reveal{
+    visibility: visible;
+  }
+</style>
+{%endblock%}

@@ -1,0 +1,471 @@
+{% extends 'shared/base.html' %} 
+
+{% load static %}
+
+{% block base_content %}  
+
+<h4 class="mb-4 text-center text-uppercase subtitle" style="margin-top: 55px;">Расчет и оформление заказа</h4>
+<div class="container" style="color: #3D3935;">
+    <div class="jumbotron">
+    <form>
+        <div class="row mb-3">
+            <div class="form-group col-md-6 col-sm-6">
+                <p class="">Откуда</p>
+                <input type="text"  class="form-control" id="cityfrom" required="" />
+               
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="address" name="inlineMaterialRadiosExample" onclick="radioCheck()">
+                        <label class="form-check-label" for="address">От адреса</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="term" name="inlineMaterialRadiosExample" onclick="radioCheck()">
+                        <label class="form-check-label" for="term">От терминала</label>
+                      </div>   
+                      
+                      
+                        <p id="addressYes" style="display:none" class="">Адрес <input type="text"   class="form-control"  required=""/> </p>
+                        <p id="termYes" style="display:none" class="">Терминал <input type="text"   class="form-control"  required=""/> </p>
+                   
+            </div>
+            <div class="form-group col-md-6 col-sm-6">
+                <p class="">Куда</p>
+                <input type="text" name="adress" id="cityto" class="form-control"  required=""/>
+
+                <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="addressTo" name="inlineMaterialRadiosExample2" onclick="radioCheckTo()">
+                    <label class="form-check-label" for="addressTo">До адреса</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input type="radio" class="form-check-input" id="termTo" name="inlineMaterialRadiosExample2" onclick="radioCheckTo()">
+                    <label class="form-check-label" for="termTo">До терминала</label>
+                  </div>
+
+                  <p id="addressToYes" style="display:none" class="">Адрес <input type="text"   class="form-control"  required=""/> </p>
+                  <p id="termToYes" style="display:none" class="">Терминал <input type="text"   class="form-control"  required=""/> </p>
+
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="form-group col-md-4 col-sm-6">
+                <p class="">Дата забора груза</p>
+                <input type="date" class="form-control" required=""  />
+            </div>
+            <div class="form-group col-md-4 col-sm-6">
+                <p class="">Вид перевозки</p>
+                <select class="form-control" aria-label="Default select example">
+                    <option value="Стандарт">Стандарт</option>
+                    <option value="Экспресс">Экспресс</option>
+                    <option value="Конверт">Конверт</option>
+                  </select>
+            </div>
+            <div class="form-group col-md-4 col-sm-6">
+                <p class="">Характер груза</p>
+                <input type="text" class="form-control" required=""/>
+            </div>
+
+            <div class="form-group col-md-12 col-sm-6">
+                <ul class="nav nav-tabs justify-content-center">
+                    <li class="nav-item">
+                      <a class="nav-link active" style="color: #007041;" data-toggle="tab" href="#morning">Утренний интервал</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" style="color: #007041;" data-toggle="tab" href="#day">Дневной интервал</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" style="color: #007041;" data-toggle="tab" href="#evening">Вечерний интервал</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content p-3">
+                    <div class="tab-pane fade show active" id="morning">
+                      <p>9:00 - 18:00</p>
+                    </div>
+                    <div class="tab-pane fade" id="day">
+                        <p>12:00 - 21:00</p>
+                    </div>
+                    <div class="tab-pane fade" id="evening">
+                        <p>15:00 - 00:00</p>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="form-group col-md-12 col-sm-6">
+                <ul class="nav nav-tabs justify-content-center">
+                    <li class="nav-item">
+                      <a class="nav-link active" style="color: #007041;" data-toggle="tab" href="#onePlace">1 место</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" style="color: #007041;" data-toggle="tab" href="#serveralPlaces">Несколько мест</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" style="color: #007041;" data-toggle="tab" href="#documentation">Документы</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content p-3">
+                    <div class="tab-pane fade show active" id="onePlace">
+                        <form>
+                            <div class="row">
+                              <div class="col-md-4 col-sm-6 ">
+                                  <p>Длина</p>
+                                <input type="text" class="form-control">
+                              </div>
+                              <div class="col-md-4 col-sm-6">
+                                  <p>Ширина</p>
+                                <input type="text" class="form-control">
+                              </div>
+                              <div class="col-md-4 col-sm-6">
+                                <p>Высота</p>
+                              <input type="text" class="form-control">
+                            </div>
+                        
+                            <div class="col-md-4 col-sm-6 ">
+                                <p>Вес</p>
+                              <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <p>Объем</p>
+                              <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <p>Количество</p>
+                              <input type="text" class="form-control">
+                            </div>
+                            </div>
+                          </form>
+                    </div>
+                    <div class="tab-pane fade" id="serveralPlaces">
+                        <form>
+                            <div class="row">
+                              <div class="col-md-3 col-sm-6 ">
+                                  <p>Общий вес</p>
+                                <input type="text" class="form-control">
+                              </div>
+                              <div class="col-md-3 col-sm-6">
+                                  <p>Общий объем</p>
+                                <input type="text" class="form-control">
+                              </div>
+                              <div class="col-md-3 col-sm-6">
+                                <p>Кол-во мест</p>
+                              <input type="text" class="form-control">
+                            </div>
+                        
+                            <div class="col-md-3 col-sm-6 ">
+                                <p>Самое длинное</p>
+                              <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <p>Самое широкое</p>
+                              <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <p>Самое высокое</p>
+                              <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <p>Самое тяжелое</p>
+                              <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                
+                            </div>
+                            </div>
+                          </form>
+                    </div>
+                    <div class="tab-pane fade" id="documentation">
+                        <form>
+                            <div class="row">
+                              <div class="col-md-6 col-sm-6 ">
+                                  <p>Длина(см)</p>
+                                <input type="text" class="form-control" placeholder="макс 31">
+                              </div>
+                              <div class="col-md-6 col-sm-6">
+                                  <p>Ширина(см)</p>
+                                <input type="text" class="form-control" placeholder="макс 25">
+                              </div>
+                              <div class="col-md-6 col-sm-6">
+                                <p>Высота(см)</p>
+                              <input type="text" class="form-control" placeholder="макс 4">
+                            </div>
+                        
+                            <div class="col-md-6 col-sm-6 ">
+                                <p>Вес(кг)</p>
+                              <input type="text" class="form-control" placeholder="макс 2">
+                            </div>
+                            </div>
+                          </form>
+                    </div>
+                  </div>
+            </div>
+                
+            <div class="accordion form-group col-md-12 col-sm-6 " id="accordionExample">
+                <div class="card z-depth-0 bordered">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" type="button" style="color: #007041;" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                        Дополнительные услуги
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="form-group col-md-6 col-sm-6">
+                            <p class="">Объявленная стоимость</p>
+                            <input type="text" name="adress"  class="form-control"  required=""/>
+                        </div>
+                            <div class="custom-control custom-checkbox">
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices">Страховка</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices1" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices1">Возврат сопроводительных документов</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices2" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices2">Отправка сопроводительных документов</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices3" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices3">Погрузо-разгрузочные работы у отправителя</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices4" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices4">Погрузо-разгрузочные работы у получателя</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices5" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices5">Пропуск на территорию отправителя</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices6" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices6">Запись на отгрузку</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices7" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices7">Платный въезд на территорию отправителя</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices8" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices8">Внутренний номер отгрузки</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices9" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices9">Наложенный платеж</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices10" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices10">Заезд на второй адрес</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices11" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices11">Подтверждение доставки</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices12" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices12">Доверенность</label>
+                                </div>
+                                <div class="form-group form-check" style="visibility: visible;">
+                                    <input type="checkbox" id="additionalServices14" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices13">Предварительный звонок</label>
+                                </div>
+                                </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card z-depth-0 bordered">
+                    <div class="card-header" id="headingTwo">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" style="color: #007041;" data-toggle="collapse"
+                          data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Упаковка груза
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                      <div class="card-body">
+                        <div class="custom-control custom-checkbox">
+                            <div class="form-group form-check" style="visibility: visible;">
+                                <input type="checkbox" id="packaging" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging">Жесткая упаковка</label>
+                            </div>
+                            <div class="form-group form-check" style="visibility: visible;">
+                                <input type="checkbox" id="packaging1" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging1">Паллетный борт</label>
+                            </div>
+                            <div class="form-group form-check" style="visibility: visible;">
+                                <input type="checkbox" id="packaging2" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging2">Мешок</label>
+                            </div>
+                            <div class="form-group form-check" style="visibility: visible;">
+                                <input type="checkbox" id="packaging3" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging3">Картонная коробка</label>
+                            </div>
+                            <div class="form-group form-check" style="visibility: visible;">
+                                <input type="checkbox" id="packaging4" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging4">Палет</label>
+                            </div>
+                            <div class="form-group form-check" style="visibility: visible;">
+                                <input type="checkbox" id="packaging5" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging5">Стреппинг</label>
+                            </div>
+                            <div class="form-group form-check" style="visibility: visible;">
+                                <input type="checkbox" id="packaging6" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging6">Стрейч - пленка</label>
+                            </div>
+                            <div class="form-group form-check" style="visibility: visible;">
+                                <input type="checkbox" id="packaging7" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging7">Воздушно - пузырьковая пленка</label>
+                            </div>
+                           
+                            </div>
+                      </div>
+                    </div>
+                  </div>
+                <div class="card z-depth-0 bordered">
+                  <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" type="button" style="color: #007041;" data-toggle="collapse"
+                        data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Участники грузоперевозок
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-md-6 col-sm-6 text-center">
+                                    <p class="">Отправитель</p>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="individual" name="inlineMaterialRadiosExample">
+                                            <label class="form-check-label" for="individual">Физическое лицо</label>
+                                          </div>
+                                          <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" id="entity" name="inlineMaterialRadiosExample">
+                                            <label class="form-check-label" for="entity">Юридическое лицо</label>
+                                          </div>   
+                                          
+                                          
+                                            <input style="display: none;" type="text"   class="form-control" placeholder="ФИО"  required=""/> </p>
+                                            <input style="display: none;" type="text"   class="form-control" placeholder="Серия и номер паспорта"/> </p>
+                                            <input style="display: none;" type="email"   class="form-control" placeholder="Email"/> </p>
+                                            <input style="display: none;" type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+
+                                            <input style="display: none;" type="text"   class="form-control" placeholder="Название компании"  required=""/> </p>
+                                            <input style="display: none;" type="text"   class="form-control" placeholder="ИНН"  required=""/> </p>
+                                            <input style="display: none;" type="text"   class="form-control" placeholder="Контактное лицо"/> </p>
+                                            <input style="display: none;" type="email"   class="form-control" placeholder="Email"  required=""/> </p>
+                                            <input style="display: none;" type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 text-center">
+                                    <p class="">Получатель</p>
+                                   
+                    
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="individual1" name="inlineMaterialRadiosExample2" onclick="radioCheckTo()">
+                                        <label class="form-check-label" for="individual1">Физическое лицо</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="entity1" name="inlineMaterialRadiosExample2" onclick="radioCheckTo()">
+                                        <label class="form-check-label" for="entity1">Юридическое лицо</label>
+                                      </div>
+                                      <input style="display: none;" type="text"   class="form-control" placeholder="ФИО"  required=""/> </p>
+                                      <input style="display: none;" type="text"   class="form-control" placeholder="Серия и номер паспорта"/> </p>
+                                      <input style="display: none;" type="email"   class="form-control" placeholder="Email"/> </p>
+                                      <input style="display: none;" type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+
+                                      <input style="display: none;" type="text"   class="form-control" placeholder="Название компании"  required=""/> </p>
+                                      <input style="display: none;" type="text"   class="form-control" placeholder="ИНН"  required=""/> </p>
+                                      <input style="display: none;" type="text"   class="form-control" placeholder="Контактное лицо"/> </p>
+                                      <input style="display: none;" type="email"   class="form-control" placeholder="Email"  required=""/> </p>
+                                      <input style="display: none;" type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+                    
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 text-center">
+                                    <p class="">Плательщик</p>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary">
+                                      <input type="radio" name="options" id="option1" autocomplete="off"> Отправитель
+                                    </label>
+                                    <label class="btn btn-secondary">
+                                      <input type="radio" name="options" id="option2" autocomplete="off"> Получатель
+                                    </label>
+                                    <label class="btn btn-secondary">
+                                      <input type="radio" name="options" id="option3" autocomplete="off"> Третье лицо
+                                    </label>
+                                  </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 text-center">
+                                    <p class="">Заказчик</p>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-secondary">
+                                          <input type="radio" name="options" id="option4" autocomplete="off"> Отправитель
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                          <input type="radio" name="options" id="option5" autocomplete="off"> Получатель
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                          <input type="radio" name="options" id="option6" autocomplete="off"> Третье лицо
+                                        </label>
+                                      </div>
+                                    </div>
+                            </div>
+                          </form>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+           
+            
+            <div class="form-group col-md-4 col-sm-6">
+                <p class="">Форма оплаты</p>
+                <select class="form-control" aria-label="Default select example">
+                    <option value="Наличный расчет">Наличный расчет</option>
+                    <option value="Безналичный расчет">Безналичный расчет</option>
+                  </select>
+            </div>
+
+            <!--Button-->
+            <div class="col-md-12 col-12 ">
+                <input type="button" style="background-color: #3D3935; border-color: #3D3935;" id="btn" class="btn btn-primary btn-lg btn-block" value="Оформить заказ"/>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function radioCheck() {
+        if (document.getElementById('address').checked) {
+            document.getElementById('addressYes').style.display = 'block';
+        }
+        else document.getElementById('addressYes').style.display = 'none';
+
+        if (document.getElementById('term').checked) {
+            document.getElementById('termYes').style.display = 'block';
+        }
+        else document.getElementById('termYes').style.display = 'none';
+
+
+    }
+
+    function radioCheckTo() {
+        if (document.getElementById('addressTo').checked) {
+            document.getElementById('addressToYes').style.display = 'block';
+        }
+        else document.getElementById('addressToYes').style.display = 'none';
+
+        if (document.getElementById('termTo').checked) {
+            document.getElementById('termToYes').style.display = 'block';
+        }
+        else document.getElementById('termToYes').style.display = 'none';
+
+
+    }
+
+    
+    </script>
+{% endblock %}
