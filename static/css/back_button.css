@@ -73,7 +73,7 @@ header .overlay {
 }
 
 .text1 {
-    font-family: Gotham ProMedium;
+    font-family: Gotham ProBold;
     font-style: normal;
     font-size: 22px;
     line-height: 26px;
@@ -85,7 +85,7 @@ header .overlay {
 }
 
 .subtitle {
-    font-family: Gotham ProMedium;
+    font-family:  Gotham ProBold;
     font-style: normal;
     font-weight: bold;
     font-size: 32px;
@@ -94,7 +94,7 @@ header .overlay {
 }
 
 .text2 {
-    font-family: Gotham Gotham ProRegular;
+    font-family: Gotham ProBold;
     font-style: normal;
     font-weight: bold;
     font-size: 18px;

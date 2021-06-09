@@ -36,6 +36,12 @@ def offices_page(req):
     }
     return render(req, 'offices.html', context)
 
+def price_page(req):
+    context = {
+        'is_worker': req.user.groups.filter(name='worker').exists(),
+    }
+    return render(req, 'price.html', context)
+
 
 def page_404(req):
     context = {

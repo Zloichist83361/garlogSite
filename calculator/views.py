@@ -1,5 +1,3 @@
-from django.db.models.expressions import F
-from django.http.response import JsonResponse
 from django.shortcuts import render
 
 from calculator.models import Calculate, Term
