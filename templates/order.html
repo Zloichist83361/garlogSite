@@ -339,49 +339,57 @@
                                 <div class="form-group col-md-6 col-sm-6 text-center">
                                     <p class="">Отправитель</p>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" id="individual" name="inlineMaterialRadiosExample">
+                                            <input type="radio" class="form-check-input" id="individual" name="inlineMaterialRadiosExample" onclick="radioCheckFace()">
                                             <label class="form-check-label" for="individual">Физическое лицо</label>
                                           </div>
                                           <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" id="entity" name="inlineMaterialRadiosExample">
+                                            <input type="radio" class="form-check-input" id="entity" name="inlineMaterialRadiosExample" onclick="radioCheckFace()">
                                             <label class="form-check-label" for="entity">Юридическое лицо</label>
                                           </div>   
                                           
-                                          
-                                            <input style="display: none;" type="text"   class="form-control" placeholder="ФИО"  required=""/> </p>
-                                            <input style="display: none;" type="text"   class="form-control" placeholder="Серия и номер паспорта"/> </p>
-                                            <input style="display: none;" type="email"   class="form-control" placeholder="Email"/> </p>
-                                            <input style="display: none;" type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+                                          <div style="display: none;" id="individualYes" >
+                                            <input  type="text"  class="form-control" placeholder="ФИО"  required=""/> </p>
+                                            <input  type="text"  class="form-control" placeholder="Серия и номер паспорта"/> </p>
+                                            <input  type="email"  class="form-control" placeholder="Email"/> </p>
+                                            <input  type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+                                          </div>
 
-                                            <input style="display: none;" type="text"   class="form-control" placeholder="Название компании"  required=""/> </p>
-                                            <input style="display: none;" type="text"   class="form-control" placeholder="ИНН"  required=""/> </p>
-                                            <input style="display: none;" type="text"   class="form-control" placeholder="Контактное лицо"/> </p>
-                                            <input style="display: none;" type="email"   class="form-control" placeholder="Email"  required=""/> </p>
-                                            <input style="display: none;" type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+                                          <div style="display: none;" id="entityYes" >
+                                            <input  type="text"    class="form-control" placeholder="Название компании"  required=""/> </p>
+                                            <input  type="text"   class="form-control" placeholder="ИНН"  required=""/> </p>
+                                            <input  type="text"    class="form-control" placeholder="Контактное лицо"/> </p>
+                                            <input  type="email"   class="form-control" placeholder="Email"  required=""/> </p>
+                                            <input type="tel"     class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+                                          </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 text-center">
                                     <p class="">Получатель</p>
                                    
                     
                                     <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" id="individual1" name="inlineMaterialRadiosExample2" onclick="radioCheckTo()">
+                                        <input type="radio" class="form-check-input" id="individual1" name="inlineMaterialRadiosExample2" onclick="radioCheckFaceTo()">
                                         <label class="form-check-label" for="individual1">Физическое лицо</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" id="entity1" name="inlineMaterialRadiosExample2" onclick="radioCheckTo()">
+                                        <input type="radio" class="form-check-input" id="entity1" name="inlineMaterialRadiosExample2" onclick="radioCheckFaceTo()">
                                         <label class="form-check-label" for="entity1">Юридическое лицо</label>
                                       </div>
-                                      <input style="display: none;" type="text"   class="form-control" placeholder="ФИО"  required=""/> </p>
-                                      <input style="display: none;" type="text"   class="form-control" placeholder="Серия и номер паспорта"/> </p>
-                                      <input style="display: none;" type="email"   class="form-control" placeholder="Email"/> </p>
-                                      <input style="display: none;" type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
 
-                                      <input style="display: none;" type="text"   class="form-control" placeholder="Название компании"  required=""/> </p>
-                                      <input style="display: none;" type="text"   class="form-control" placeholder="ИНН"  required=""/> </p>
-                                      <input style="display: none;" type="text"   class="form-control" placeholder="Контактное лицо"/> </p>
-                                      <input style="display: none;" type="email"   class="form-control" placeholder="Email"  required=""/> </p>
-                                      <input style="display: none;" type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
-                    
+                                      <div style="display: none;" id="individualYes1">
+                                        <input  type="text"  class="form-control" placeholder="ФИО"  required=""/> </p>
+                                        <input  type="text"  class="form-control" placeholder="Серия и номер паспорта"/> </p>
+                                        <input  type="email" class="form-control" placeholder="Email"/> </p>
+                                        <input  type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+                                      </div>
+
+                                      <div style="display: none;" id="entityYes1" >
+                                        <input  type="text"   class="form-control" placeholder="Название компании"  required=""/> </p>
+                                        <input  type="text"    class="form-control" placeholder="ИНН"  required=""/> </p>
+                                        <input  type="text"    class="form-control" placeholder="Контактное лицо"/> </p>
+                                        <input  type="email"    class="form-control" placeholder="Email"  required=""/> </p>
+                                        <input  type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+                                      </div>
+
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 text-center">
                                     <p class="">Плательщик</p>
@@ -462,6 +470,35 @@
             document.getElementById('termToYes').style.display = 'block';
         }
         else document.getElementById('termToYes').style.display = 'none';
+
+
+    }
+
+    function radioCheckFace() {
+        if (document.getElementById('individual').checked) {
+            document.getElementById('individualYes').style.display = 'block';
+        }
+        else document.getElementById('individualYes').style.display = 'none';
+
+        if (document.getElementById('entity').checked) {
+            document.getElementById('entityYes').style.display = 'block';
+        }
+        else document.getElementById('entityYes').style.display = 'none';
+
+
+    }
+
+    function radioCheckFaceTo() {
+        if (document.getElementById('individual1').checked) {
+            document.getElementById('individualYes1').style.display = 'block';
+
+        }
+        else document.getElementById('individualYes1').style.display = 'none';
+
+        if (document.getElementById('entity1').checked) {
+            document.getElementById('entityYes1').style.display = 'block';
+        }
+        else document.getElementById('entityYes1').style.display = 'none';
 
 
     }

@@ -14,11 +14,10 @@ def calc(req):
 
     dataTerm = list(Term.objects.values())
     responseTerm = json.dumps(dataTerm)
-
+    
     context = {
         'is_worker': req.user.groups.filter(name='worker').exists(),
-        'responsePrice': responsePrice,
-        'responseTerm': responseTerm,
+        'responseAll': responsePrice + responseTerm,
     }
 
     return render(req, 'calculator.html', context)

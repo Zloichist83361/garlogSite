@@ -81,8 +81,9 @@
     </div>
 </div>
 <script>
-  let responsePrice = "{{responsePrice|escapejs}}"
-  let responseTerm = "{{responseTerm|escapejs}}"
+
+  let resposneAll = "{{responseAll|escapejs}}"
+  console.log(resposneAll)
 
   let req = new XMLHttpRequest();
   let cityfrom = document.getElementById('cityfrom').value;
@@ -93,31 +94,22 @@
   let pickUp = document.getElementById('pickUp').checked;
   let delivery = document.getElementById('delivery').checked;
 
-  json = cityfrom + "/" + cityto + "/" + quantity + "/" + weight + "/" + volume + "/" + pickUp + "/" + delivery;
+    let btn = document.getElementById('btn');
+    let standartCost = document.getElementById('standartCost');
+    let standartTerm = document.getElementById('standartTerm');
+    let expressCost = document.getElementById('expressCost');
+    let expressTerm = document.getElementById('expressTerm');
+    let orderButton = document.getElementById('orderBtn');
 
-  /*if (cityfrom != '' && cityto != '' && quantity != '' && weight != '' && volume != ''){
-    req.onload = function() {
+    btn.addEventListener("click", () => {
+      standartCost.innerHTML = 300;
+      standartTerm.innerHTML = 1 + '-' + 3;
+      expressCost.innerHTML = 400;
+      expressTerm.innerHTML = 1 ;
 
-      let response = JSON.parse(this.responseText);
-      if (response.inter_terminal && response.)
-    }
-  }*/
+      orderButton.classList.add("reveal");
+    })
 
-  let btn = document.getElementById('btn');
-  let standartCost = document.getElementById('standartCost');
-  let standartTerm = document.getElementById('standartTerm');
-  let expressCost = document.getElementById('expressCost');
-  let expressTerm = document.getElementById('expressTerm');
-  let orderButton = document.getElementById('orderBtn');
-
-  btn.addEventListener("click", () => {
-    standartCost.innerHTML = 300;
-    standartTerm.innerHTML = 1 + '-' + 3;
-    expressCost.innerHTML = 400;
-    expressTerm.innerHTML = 1 ;
-
-    orderButton.classList.add("reveal");
-  });
 </script>
 <style>
   .reveal{
