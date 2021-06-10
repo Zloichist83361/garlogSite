@@ -3,30 +3,19 @@
 
 <h4 class="mb-4 text-center text-uppercase subtitle" style="margin-top: 55px;">Офисы</h4>
 <div class="container">
-    <div class="col-xl">
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">Санкт-Петербург</a>
-            <a href="#" class="list-group-item list-group-item-action">На севере Санкт-Петербурга (склад нашего партнера компани БСД)</a>
-            <a href="#" class="list-group-item list-group-item-action">Выборг</a>
-            <a href="#" class="list-group-item list-group-item-action">Боровичи</a>
-            <a href="#" class="list-group-item list-group-item-action">Великие Луки</a>
-            <a href="#" class="list-group-item list-group-item-action">Великий Новгород</a>
-            <a href="#" class="list-group-item list-group-item-action">Волхов</a>
-            <a href="#" class="list-group-item list-group-item-action">Ивангород</a>
-            <a href="#" class="list-group-item list-group-item-action">Кириши</a>
-            <a href="#" class="list-group-item list-group-item-action">Кировск</a>
-            <a href="#" class="list-group-item list-group-item-action">Кингисепп</a>
-            <a href="#" class="list-group-item list-group-item-action">Лодейное Поле</a>
-            <a href="#" class="list-group-item list-group-item-action">Луга</a>
-            <a href="#" class="list-group-item list-group-item-action">Петрозаводск</a>
-            <a href="#" class="list-group-item list-group-item-action">Приозерск</a>
-            <a href="#" class="list-group-item list-group-item-action">Псков</a>
-            <a href="#" class="list-group-item list-group-item-action">Рощино</a>
-            <a href="#" class="list-group-item list-group-item-action">Сланцы</a>
-            <a href="#" class="list-group-item list-group-item-action">Сортавала</a>
-            <a href="#" class="list-group-item list-group-item-action">Сосновый Бор</a>
-            <a href="#" class="list-group-item list-group-item-action">Тихвин</a>
-            <a href="#" class="list-group-item list-group-item-action">Тосно</a>
+    <div class="row">
+        
+        <div class="col-xl">
+            {% for office in office_list %}
+     
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ office.city| safe }}</h2>
+                        <p class="card-text">{{office.text| safe}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            
         </div>
     </div>
 </div>

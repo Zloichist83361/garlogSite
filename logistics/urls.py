@@ -42,6 +42,7 @@ urlpatterns = [
     path('pages/', include('django.contrib.flatpages.urls')),
     path('', include('common.urls')),
     path('', include('news.urls')),
+    path('', include('office.urls')),
     path('', include('accounts.urls')),
     path('', include('calculator.urls')),
     path('', include('order.urls')),

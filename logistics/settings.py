@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-%x-07l91p&hm0ff3nh%8cyojdzw)4mqcfl=@no9pj62&oj%@(r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['d4fb7cbbdfb0.ngrok.io']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -41,19 +41,20 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.sites',
     'django.contrib.flatpages',
-
+    'location_field.apps.DefaultConfig',
+    
     'accounts.apps.AccountsConfig',
     'common.apps.CommonConfig',
     'consignment.apps.ConsignmentConfig',
     'calculator.apps.CalculatorConfig',
     'contacts.apps.ContactsConfig',
     'news.apps.NewsConfig',
+    'office.apps.OfficeConfig',
     'personal_profile.apps.PersonalProfileConfig',
 
     'rest_framework',
     'ckeditor',
     'ckeditor_uploader',
-    'phonenumber_field',
 ]
 
 
@@ -67,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 
@@ -232,3 +234,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'n.chistyak0v322@gmail.com'
 EMAIL_HOST_PASSWORD = 'Okeygoogle322'
+
+
+DJEYM_YMAPS_API_KEY = 'a599779a-91be-40aa-9a21-e4048d756cd1'
+DJEYM_YMAPS_API_KEY_FOR_ENTERPRISE = False
