@@ -16,12 +16,15 @@ def calc(req):
     dataPrice = list(Calculate.objects.values())
     responsePrice = json.dumps(dataPrice)
 
+    price = responsePrice[1]
+
     dataTerm = list(Term.objects.values())
     responseTerm = json.dumps(dataTerm)
     
     context = {
         'is_worker': req.user.groups.filter(name='worker').exists(),
         'responseAll': responsePrice + responseTerm,
+        'price': price,
     }
 
     return render(req, 'calculator.html', context)
