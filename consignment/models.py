@@ -23,6 +23,7 @@ class TrackStatusConsignment(models.Model):
     )
     
     tracking_number = models.CharField(max_length=255, blank=False, unique=True)
+    tracking_number_client = models.CharField(max_length=255, blank=False, unique=True)
     status = models.CharField(choices=STATUS_CHOICES, max_length=50, default='Уточняется')
     delivery_date = models.DateField(blank=False)
     status_pay = models.CharField(choices=STATUSPAY_CHOICES, max_length=50, default='Уточняется')

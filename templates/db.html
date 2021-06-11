@@ -1,0 +1,163 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+<div class="container" style="padding-top: 10px;">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"><abbr title="ID">ID</abbr></th>
+                <th scope="col">Номер трекинга</th>
+                <th scope="col">Номер трекинга клиента</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Дата доставки</th>
+                <th scope="col">Статус оплаты</th>
+                <th scope="col">Направление</th>
+            </tr>
+        </thead>
+        {% for track in tracks %}
+        <tbody>
+            <tr>
+                <th scope="row">{{ track.id }}</th>
+                <td>{{ track.tracking_number }}</td>
+                <td>{{ track.tracking_number_client }}</td>
+                <td>{{ track.status }}</td>
+                <td>{{ track.delivery_date }}</td>
+                <td>{{ track.status_pay }}</td>
+                <td>{{ track.route }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+
+
+<div class="container-fliud" style="padding-top: 10px;">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"><abbr title="ID">ID</abbr></th>
+                <th scope="col">Город отправления</th>
+                <th scope="col">Город получения</th>
+                <th scope="col">Адрес/Терминал отправления</th>
+                <th scope="col">Адрес/Терминал получения</th>
+                <th scope="col">Заказчик</th>
+                <th scope="col">Получатель</th>
+                <th scope="col">Плательщик</th>
+                <th scope="col">Адрес забора</th>
+                <th scope="col">Адрес доставки</th>
+                <th scope="col">Дата забора</th>
+                <th scope="col">Интервал забора</th>
+                <th scope="col">Кол-во мест</th>
+                <th scope="col">Вес</th>
+                <th scope="col">Объем</th>
+                <th scope="col">Тип доставки</th>
+            </tr>
+        </thead>
+        {% for order in orders %}
+        <tbody>
+            <tr>
+                <th scope="row">{{ order.id }}</th>
+                <td>{{ order.city_from }}</td>
+                <td>{{ order.city_to }}</td>
+                <td>{{ order.from_address }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="container" style="padding-top: 10px;">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"><abbr title="ID">ID</abbr></th>
+                <th scope="col">Номер заявки</th>
+                <th scope="col">Статус</th>
+                <th scope="col">Дата доставки</th>
+            </tr>
+        </thead>
+        {% for orderstatus in orderstatuss %}
+        <tbody>
+            <tr>
+                <th scope="row">{{ orderstatus.id }}</th>
+                <td>{{ orderstatus.order_number }}</td>
+                <td>{{ orderstatus.status }}</td>
+                <td>{{ orderstatus.delivery_date }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="container" style="padding-top: 10px;">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"><abbr title="ID">ID</abbr></th>
+                <th scope="col">Город отправления</th>
+                <th scope="col">Город получения</th>
+                <th scope="col">Вес от</th>
+                <th scope="col">Вес до</th>
+                <th scope="col">Межтерминальная</th>
+                <th scope="col">Экспедирование1</th>
+                <th scope="col">Экспедирование2</th>
+                <th scope="col">Надбавка</th>
+            </tr>
+        </thead>
+        {% for calc in calcs %}
+        <tbody>
+            <tr>
+                <th scope="row">{{ calc.id }}</th>
+                <td>{{ calc.cityto }}</td>
+                <td>{{ calc.cityfrom }}</td>
+                <td>{{ calc.weightto }}</td>
+                <td>{{ calc.weightfrom }}</td>
+                <td>{{ calc.inter_terminal }}</td>
+                <td>{{ calc.pickup }}</td>
+                <td>{{ calc.cargo_delivery }}</td>
+                <td>{{ calc.premium }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+
+
+<div class="container" style="padding-top: 10px;">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"><abbr title="ID">ID</abbr></th>
+                <th scope="col">Город отправления</th>
+                <th scope="col">Город получения</th>
+                <th scope="col">Срок Стандарт от</th>
+                <th scope="col">Срок Стандарт до</th>
+                <th scope="col">Срок Экспресс от</th>
+                <th scope="col">Срок Экспресс до</th>
+            </tr>
+        </thead>
+        {% for term in terms %}
+        <tbody>
+            <tr>
+                <th scope="row">{{ term.id }}</th>
+                <td>{{ term.cityto }}</td>
+                <td>{{ term.cityfrom }}</td>
+                <td>{{ term.term_standart_to }}</td>
+                <td>{{ term.term_standart_from }}</td>
+                <td>{{ term.term_express_to }}</td>
+                <td>{{ term.term_express_from }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+
+
+<script>
+    $.ajax({
+        url: '{% url "db" %}',
+        type: 'get',
+    });
+</script>

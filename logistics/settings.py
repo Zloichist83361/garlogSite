@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ckeditor',
     'ckeditor_uploader',
+
 ]
 
 
@@ -99,9 +100,9 @@ WSGI_APPLICATION = 'logistics.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'garantdb', 
-        'USER': 'garantuser', 
-        'PASSWORD': 'garantpassword',
+        'NAME': 'myprojectgl', 
+        'USER': 'myprojectusergl', 
+        'PASSWORD': 'password',
         'HOST': '127.0.0.1', 
         'PORT': '5432',
     }

@@ -1,5 +1,7 @@
+
 from django.shortcuts import render
-from django.views import generic
+from django.views.generic import ListView
+
 # Create your views here.
 
 def landing_page(req):
@@ -48,3 +50,4 @@ def page_404(req):
         'is_worker': req.user.groups.filter(name='worker').exists(),
     }
     return render(req, '404_page.html', context)
+

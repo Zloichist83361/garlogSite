@@ -1,4 +1,7 @@
+from django.db.models import query
 from django.http.response import JsonResponse
+from django.shortcuts import render
+from django.views.generic import ListView
 
 from rest_framework import status
 from rest_framework.parsers import JSONParser 
@@ -89,3 +92,14 @@ def consignment_detail_orderstatus(request, pk):
 
 
 
+def db(request):
+    queryset_track = TrackStatusConsignment.objects.all()
+    queryset_order = OrderConsignment.objects.all()
+    queryset_orderStatus = OrderStatusConsignment.objects.all()
+    context = {
+        'tracks': queryset_track,
+        'orders': queryset_order,
+        'orderstatuss': queryset_orderStatus,
+    }
+    
+    return render(request, 'db.html', context)
