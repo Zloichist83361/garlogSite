@@ -1,35 +1,58 @@
 {% extends 'shared/base.html' %} 
-
+{% load crispy_forms_tags %}
 {% load static %}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
 {% block base_content %}  
 
 <h4 class="mb-4 text-center text-uppercase subtitle" style="margin-top: 55px;">Расчет и оформление заказа</h4>
 <div class="container" style="color: #3D3935;">
     <div class="jumbotron">
-    <form>
+    <form  method="post">
+      {% csrf_token %}
         <div class="row mb-3">
             <div class="form-group col-md-6 col-sm-6">
-                <p class="">Откуда</p>
-                <input type="text"  class="form-control" id="cityfrom" required="" />
+              {{ form.city_to|as_crispy_field }}
+                <!--<p class="">Откуда</p>-->
+                <!--<input type="text"  class="form-control" id="cityfrom"  required="" />-->
                
                     <div class="form-check form-check-inline">
+                   
                         <input type="radio" class="form-check-input" id="address" name="inlineMaterialRadiosExample" onclick="radioCheck()">
                         <label class="form-check-label" for="address">От адреса</label>
                       </div>
                       <div class="form-check form-check-inline">
+         
                         <input type="radio" class="form-check-input" id="term" name="inlineMaterialRadiosExample" onclick="radioCheck()">
                         <label class="form-check-label" for="term">От терминала</label>
                       </div>   
                       
-                      
-                        <p id="addressYes" style="display:none" class="">Адрес <input type="text"   class="form-control"  required=""/> </p>
-                        <p id="termYes" style="display:none" class="">Терминал <input type="text"   class="form-control"  required=""/> </p>
-                   
+                      <div id="addressYes" style="display: none;">
+                        {{ form.address_from|as_crispy_field }}
+                      </div>
+                      <div id="termYes" style="display: none;">
+                        {{ form.terminal_from|as_crispy_field }}
+                      </div>
             </div>
             <div class="form-group col-md-6 col-sm-6">
-                <p class="">Куда</p>
-                <input type="text" name="adress" id="cityto" class="form-control"  required=""/>
+              {{ form.city_from|as_crispy_field }}
+                <!--<p class="">Куда</p>
+                <input type="text" name="adress" id="cityto" class="form-control"  required=""/>-->
 
                 <div class="form-check form-check-inline">
                     <input type="radio" class="form-check-input" id="addressTo" name="inlineMaterialRadiosExample2" onclick="radioCheckTo()">
@@ -40,31 +63,37 @@
                     <label class="form-check-label" for="termTo">До терминала</label>
                   </div>
 
-                  <p id="addressToYes" style="display:none" class="">Адрес <input type="text"   class="form-control"  required=""/> </p>
-                  <p id="termToYes" style="display:none" class="">Терминал <input type="text"   class="form-control"  required=""/> </p>
-
+                  <div id="addressToYes" style="display: none;">
+                    {{ form.address_to|as_crispy_field }}
+                  </div>
+                  <div id="termToYes" style="display: none;">
+                    {{ form.terminal_to|as_crispy_field }}
+                  </div>
             </div>
         </div>
         <div class="row mb-3">
-            <div class="form-group col-md-4 col-sm-6">
+            <div class="form-group col-md-6 col-sm-6">
                 <p class="">Дата забора груза</p>
-                <input type="date" class="form-control" required=""  />
+                <input type="date" class="form-control" required="" value="{{ orderconsignment.date_cargo}}" />
             </div>
-            <div class="form-group col-md-4 col-sm-6">
-                <p class="">Вид перевозки</p>
+            <div class="form-group col-md-6 col-sm-6">
+              {{ form.type_transporation|as_crispy_field }}
+                <!--<p class="">Вид перевозки</p>
                 <select class="form-control" aria-label="Default select example">
                     <option value="Стандарт">Стандарт</option>
                     <option value="Экспресс">Экспресс</option>
                     <option value="Конверт">Конверт</option>
-                  </select>
+                  </select>-->
             </div>
-            <div class="form-group col-md-4 col-sm-6">
-                <p class="">Характер груза</p>
-                <input type="text" class="form-control" required=""/>
+            <div class="form-group col-md-6 col-sm-6">
+              {{ form.nature_cargo|as_crispy_field }}
+                <!--<p class="">Характер груза</p>
+                <input type="text" class="form-control" required=""/>-->
             </div>
 
-            <div class="form-group col-md-12 col-sm-6">
-                <ul class="nav nav-tabs justify-content-center">
+            <div class="form-group col-md-6 col-sm-6">
+              {{ form.interval|as_crispy_field }}
+                <!--<ul class="nav nav-tabs justify-content-center">
                     <li class="nav-item">
                       <a class="nav-link active" style="color: #007041;" data-toggle="tab" href="#morning">Утренний интервал</a>
                     </li>
@@ -85,7 +114,7 @@
                     <div class="tab-pane fade" id="evening">
                         <p>15:00 - 00:00</p>
                     </div>
-                  </div>
+                  </div>-->
             </div>
 
             <div class="form-group col-md-12 col-sm-6">
@@ -214,65 +243,80 @@
                     data-parent="#accordionExample">
                     <div class="card-body">
                         <div class="form-group col-md-6 col-sm-6">
-                            <p class="">Объявленная стоимость</p>
-                            <input type="text" name="adress"  class="form-control"  required=""/>
+                          {{ form.declared_value|as_crispy_field }}
+                            <!--<p class="">Объявленная стоимость</p>
+                            <input type="text" name="adress"  class="form-control"  required=""/>-->
                         </div>
                             <div class="custom-control custom-checkbox">
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices">Страховка</label>
+                                  {{ form.insurance|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices">Страховка</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices1" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices1">Возврат сопроводительных документов</label>
+                                  {{ form.return_of_accompanying_documents|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices1" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices1">Возврат сопроводительных документов</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices2" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices2">Отправка сопроводительных документов</label>
+                                  {{ form.sending_accompanying_documents|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices2" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices2">Отправка сопроводительных документов</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices3" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices3">Погрузо-разгрузочные работы у отправителя</label>
+                                  {{ form.loading_and_unloading_sender|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices3" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices3">Погрузо-разгрузочные работы у отправителя</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices4" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices4">Погрузо-разгрузочные работы у получателя</label>
+                                  {{ form.loading_and_unloading_recipient|as_crispy_field }}
+                                   <!--<input type="checkbox" id="additionalServices4" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices4">Погрузо-разгрузочные работы у получателя</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices5" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices5">Пропуск на территорию отправителя</label>
+                                  {{ form.pass_sender_territory|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices5" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices5">Пропуск на территорию отправителя</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices6" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices6">Запись на отгрузку</label>
+                                  {{ form.registration_for_shipment|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices6" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices6">Запись на отгрузку</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices7" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices7">Платный въезд на территорию отправителя</label>
+                                  {{ form.paid_entry_sender_territory|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices7" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices7">Платный въезд на территорию отправителя</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices8" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices8">Внутренний номер отгрузки</label>
+                                  {{ form.internal_shipment_number|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices8" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices8">Внутренний номер отгрузки</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices9" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices9">Наложенный платеж</label>
+                                  {{ form.cod|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices9" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices9">Наложенный платеж</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices10" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices10">Заезд на второй адрес</label>
+                                  {{ form.second_address|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices10" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices10">Заезд на второй адрес</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices11" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices11">Подтверждение доставки</label>
+                                  {{ form.delivery_confirmation|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices11" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices11">Подтверждение доставки</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices12" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices12">Доверенность</label>
+                                  {{ form.power_of_attorney|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices12" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices12">Доверенность</label>-->
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
-                                    <input type="checkbox" id="additionalServices14" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices13">Предварительный звонок</label>
+                                  {{ form.pre_call|as_crispy_field }}
+                                    <!--<input type="checkbox" id="additionalServices14" name="mess" class="custom-control-input"/>
+                                    <label class="custom-control-label" for="additionalServices13">Предварительный звонок</label>-->
                                 </div>
                                 </div>
                     </div>
@@ -291,36 +335,44 @@
                       <div class="card-body">
                         <div class="custom-control custom-checkbox">
                             <div class="form-group form-check" style="visibility: visible;">
-                                <input type="checkbox" id="packaging" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging">Жесткая упаковка</label>
+                              {{ form.rigid_packaging|as_crispy_field }}
+                                <!--<input type="checkbox" id="packaging" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging">Жесткая упаковка</label>-->
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
-                                <input type="checkbox" id="packaging1" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging1">Паллетный борт</label>
+                              {{ form.pallet_board|as_crispy_field }}
+                                <!--<input type="checkbox" id="packaging1" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging1">Паллетный борт</label>-->
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
-                                <input type="checkbox" id="packaging2" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging2">Мешок</label>
+                              {{ form.bag|as_crispy_field }}
+                                <!--<input type="checkbox" id="packaging2" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging2">Мешок</label>-->
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
-                                <input type="checkbox" id="packaging3" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging3">Картонная коробка</label>
+                              {{ form.cardboard_box|as_crispy_field }}
+                                <!--<input type="checkbox" id="packaging3" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging3">Картонная коробка</label>-->
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
-                                <input type="checkbox" id="packaging4" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging4">Палет</label>
+                              {{ form.pallet|as_crispy_field }}
+                                <!--<input type="checkbox" id="packaging4" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging4">Палет</label>-->
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
-                                <input type="checkbox" id="packaging5" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging5">Стреппинг</label>
+                              {{ form.strapping|as_crispy_field }}
+                                <!--<input type="checkbox" id="packaging5" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging5">Стреппинг</label>-->
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
-                                <input type="checkbox" id="packaging6" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging6">Стрейч - пленка</label>
+                              {{ form.stretch|as_crispy_field }}
+                                <!--<input type="checkbox" id="packaging6" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging6">Стрейч - пленка</label>-->
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
-                                <input type="checkbox" id="packaging7" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging7">Воздушно - пузырьковая пленка</label>
+                              {{ form.air_bubble|as_crispy_field }}
+                                <!--<input type="checkbox" id="packaging7" name="mess" class="custom-control-input"/>
+                                <label class="custom-control-label" for="packaging7">Воздушно - пузырьковая пленка</label>-->
                             </div>
                            
                             </div>
@@ -336,14 +388,14 @@
                       </button>
                     </h5>
                   </div>
-                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                  <div id="collapseThree" class="collapse text-center" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <div class="card-body">
                         <form>
                             <div class="row">
-                                <div class="form-group col-md-6 col-sm-6 text-center">
-                                    <p class="">Отправитель</p>
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <p class="font-weight-bold">Отправитель</p>
                                         <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" id="individual" name="inlineMaterialRadiosExample" onclick="radioCheckFace()">
+                                            <input type="radio" class="form-check-input text-center" id="individual" name="inlineMaterialRadiosExample" onclick="radioCheckFace()">
                                             <label class="form-check-label" for="individual">Физическое лицо</label>
                                           </div>
                                           <div class="form-check form-check-inline">
@@ -352,22 +404,31 @@
                                           </div>   
                                           
                                           <div style="display: none;" id="individualYes" >
-                                            <input  type="text"  class="form-control" placeholder="ФИО"  required=""/> </p>
+                                            {{ form.fio_individual|as_crispy_field }}
+                                            {{ form.passport_individual|as_crispy_field }}
+                                            {{ form.email_individual|as_crispy_field }}
+                                            {{ form.phone_individual|as_crispy_field }}
+                                            <!--<input  type="text"  class="form-control" placeholder="ФИО"  required=""/> </p>
                                             <input  type="text"  class="form-control" placeholder="Серия и номер паспорта"/> </p>
                                             <input  type="email"  class="form-control" placeholder="Email"/> </p>
-                                            <input  type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+                                            <input  type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>-->
                                           </div>
 
                                           <div style="display: none;" id="entityYes" >
-                                            <input  type="text"    class="form-control" placeholder="Название компании"  required=""/> </p>
+                                            {{ form.fio_entity|as_crispy_field }}
+                                            {{ form.inn_entity|as_crispy_field }}
+                                            {{ form.contact_person_entity|as_crispy_field }}
+                                            {{ form.email_entity|as_crispy_field }}
+                                            {{ form.phone_entity|as_crispy_field }}
+                                            <!--<input  type="text"    class="form-control" placeholder="Название компании"  required=""/> </p>
                                             <input  type="text"   class="form-control" placeholder="ИНН"  required=""/> </p>
                                             <input  type="text"    class="form-control" placeholder="Контактное лицо"/> </p>
                                             <input  type="email"   class="form-control" placeholder="Email"  required=""/> </p>
-                                            <input type="tel"     class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+                                            <input type="tel"     class="form-control" placeholder="Контактный телефон"  required=""/> </p>-->
                                           </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 text-center">
-                                    <p class="">Получатель</p>
+                                    <p class="font-weight-bold">Получатель</p>
                                    
                     
                                     <div class="form-check form-check-inline">
@@ -380,48 +441,72 @@
                                       </div>
 
                                       <div style="display: none;" id="individualYes1">
-                                        <input  type="text"  class="form-control" placeholder="ФИО"  required=""/> </p>
+                                        {{ form.fio_individual|as_crispy_field }}
+                                        {{ form.passport_individual|as_crispy_field }}
+                                        {{ form.email_individual|as_crispy_field }}
+                                        {{ form.phone_individual|as_crispy_field }}
+                                        <!--<input  type="text"  class="form-control" placeholder="ФИО"  required=""/> </p>
                                         <input  type="text"  class="form-control" placeholder="Серия и номер паспорта"/> </p>
                                         <input  type="email" class="form-control" placeholder="Email"/> </p>
-                                        <input  type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+                                        <input  type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>-->
                                       </div>
 
                                       <div style="display: none;" id="entityYes1" >
-                                        <input  type="text"   class="form-control" placeholder="Название компании"  required=""/> </p>
+                                        {{ form.fio_entity|as_crispy_field }}
+                                        {{ form.inn_entity|as_crispy_field }}
+                                        {{ form.contact_person_entity|as_crispy_field }}
+                                        {{ form.email_entity|as_crispy_field }}
+                                        {{ form.phone_entity|as_crispy_field }}
+                                        <!--<input  type="text"   class="form-control" placeholder="Название компании"  required=""/> </p>
                                         <input  type="text"    class="form-control" placeholder="ИНН"  required=""/> </p>
                                         <input  type="text"    class="form-control" placeholder="Контактное лицо"/> </p>
                                         <input  type="email"    class="form-control" placeholder="Email"  required=""/> </p>
-                                        <input  type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>
+                                        <input  type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>-->
                                       </div>
 
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 text-center">
-                                    <p class="">Плательщик</p>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-secondary">
-                                      <input type="radio" name="options" id="option1" autocomplete="off"> Отправитель
-                                    </label>
-                                    <label class="btn btn-secondary">
-                                      <input type="radio" name="options" id="option2" autocomplete="off"> Получатель
-                                    </label>
-                                    <label class="btn btn-secondary">
-                                      <input type="radio" name="options" id="option3" autocomplete="off"> Третье лицо
-                                    </label>
+                                    <p class="font-weight-bold">Плательщик</p>
+                                <div class="btn-group btn-group-toggle" data-toggle="checkbox">                                    
+                                      {{ form.sender_payer|as_crispy_field }} 
+                                      &nbsp;   
+                                      &nbsp;                               
+                                      {{ form.recipient_payer|as_crispy_field }}  
+                                      &nbsp;       
+                                      &nbsp;     
+                                      <div class="form-check">             
+                                        <input type="checkbox" class="checkboxinput form-check-input" id="thirdP" onclick="check()">
+                                      <label for="thirdP" class="form-check-label">
+                                        Третье лицо
+                                      </label>                                        
                                   </div>
                                 </div>
+                                  <div style="display: none;" id="thirdPYes">
+                                    {{ form.third_person|as_crispy_field }} 
+                                  </div> 
+                                </div>
                                 <div class="form-group col-md-6 col-sm-6 text-center">
-                                    <p class="">Заказчик</p>
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-secondary">
-                                          <input type="radio" name="options" id="option4" autocomplete="off"> Отправитель
-                                        </label>
-                                        <label class="btn btn-secondary">
-                                          <input type="radio" name="options" id="option5" autocomplete="off"> Получатель
-                                        </label>
-                                        <label class="btn btn-secondary">
-                                          <input type="radio" name="options" id="option6" autocomplete="off"> Третье лицо
-                                        </label>
-                                      </div>
+                                    <p class="font-weight-bold">Заказчик</p>
+                                    <div class="btn-group btn-group-toggle" data-toggle="checkbox">
+                                      {{ form.sender_customer|as_crispy_field }}        
+                                      &nbsp;
+                                      &nbsp;                      
+                                      {{ form.recipient_customer|as_crispy_field }}   
+                                      &nbsp;
+                                      &nbsp;     
+                                      
+                                   
+                                        <div class="form-check">             
+                                          <input type="checkbox" class="checkboxinput form-check-input" id="thirdP1" onclick="check()">
+                                        <label for="thirdP1" class="form-check-label">
+                                          Третье лицо
+                                        </label>                              
+
+                                      </div> 
+                                    </div>
+                                      <div style="display: none;" id="thirdP1Yes" >
+                                        {{ form.third_person|as_crispy_field }} 
+                                      </div> 
                                     </div>
                             </div>
                           </form>
@@ -430,24 +515,31 @@
                   </div>
                 </div>
               </div>
-           
-            
+
             <div class="form-group col-md-4 col-sm-6">
-                <p class="">Форма оплаты</p>
+              {{ form.pay_cargo|as_crispy_field }}
+                <!--<p class="">Форма оплаты</p>
                 <select class="form-control" aria-label="Default select example">
                     <option value="Наличный расчет">Наличный расчет</option>
                     <option value="Безналичный расчет">Безналичный расчет</option>
-                  </select>
+                  </select>-->
             </div>
-
+            
             <!--Button-->
-            <div class="col-md-12 col-12 ">
+            <div class="col-md-12 col-12 ">        
                 <input type="button" style="background-color: #3D3935; border-color: #3D3935;" id="btn" class="btn btn-primary btn-lg btn-block" value="Оформить заказ"/>
             </div>
         </div>
     </form>
+    
     </div>
 </div>
+<script src="http://code.jquery.com/jquery-1.9.1.js">
+</script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js">
+</script>
+<script type="text/javascript" src="{% static 'bootstrap-tab.js' %}">  </script>
+
 <script type="text/javascript">
 
     function radioCheck() {
@@ -506,6 +598,19 @@
 
 
     }
+
+    function check(){
+      if (document.getElementById('thirdP').checked) {
+        document.getElementById('thirdPYes').style.display = 'block';
+      }
+      else document.getElementById('thirdPYes').style.display = 'none';
+
+      if (document.getElementById('thirdP1').checked) {
+        document.getElementById('thirdP1Yes').style.display = 'block';
+      }
+      else document.getElementById('thirdP1Yes').style.display = 'none';
+    }
+
 
     
     </script>

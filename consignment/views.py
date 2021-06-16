@@ -1,3 +1,5 @@
+from decimal import Context
+import json
 from django.db.models import query
 from django.http.response import JsonResponse
 from django.shortcuts import render
@@ -7,8 +9,8 @@ from rest_framework import status
 from rest_framework.parsers import JSONParser 
 from rest_framework.decorators import api_view
 
-from .models import TrackStatusConsignment, OrderConsignment, OrderStatusConsignment
-from .serializers import TrackStatusConsignmentSerializer, OrderConsignmentSerializer, OrderStatusConsignmentSerializer
+from .models import TrackStatusConsignment, OrderConsignment, OrderStatusConsignment, Cities
+from .serializers import TrackStatusConsignmentSerializer, OrderConsignmentSerializer, OrderStatusConsignmentSerializer, CitiesSerializer
 
 
 @api_view(['GET', 'DELETE'])
@@ -89,17 +91,37 @@ def consignment_detail_orderstatus(request, pk):
             return JsonResponse(orderstatus_consignments_serializer.data, {'message': 'Статус накладной обновлен!'}, status=status.HTTP_201_CREATED, safe=False)
         return JsonResponse(orderstatus_consignments_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET', 'POST', 'DELETE'])
+def add_cities(request):
+    if request.method == 'GET':
+        cities = Cities.objects.all()
+        cities_serializer = CitiesSerializer(cities, many=True)
+        return JsonResponse(cities_serializer.data, safe=False)
 
+    elif request.method == 'POST':
+        cities_data = JSONParser().parse(request)
+        cities_serializer = CitiesSerializer(data=cities_data, many=True)
+        if cities_serializer.is_valid():
+            cities_serializer.save()
+            return JsonResponse(cities_serializer.data, safe=False, status=status.HTTP_201_CREATED)
+        return JsonResponse(cities_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        count = Cities.objects.all().delete()
+        return JsonResponse({'message': '{} Заявки были успешно удалены!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
 
 
 def db(request):
     queryset_track = TrackStatusConsignment.objects.all()
     queryset_order = OrderConsignment.objects.all()
     queryset_orderStatus = OrderStatusConsignment.objects.all()
+    queryset_cities = Cities.objects.all()
     context = {
         'tracks': queryset_track,
         'orders': queryset_order,
         'orderstatuss': queryset_orderStatus,
+        'cities': queryset_cities,
     }
     
     return render(request, 'db.html', context)
+

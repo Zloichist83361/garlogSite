@@ -1,5 +1,6 @@
+from django.db.models import fields
 from rest_framework import serializers 
-from .models import TrackStatusConsignment, OrderConsignment, OrderStatusConsignment
+from .models import TrackStatusConsignment, OrderConsignment, OrderStatusConsignment, Cities
 
 class TrackStatusConsignmentSerializer(serializers.ModelSerializer):
 
@@ -45,3 +46,11 @@ class OrderStatusConsignmentSerializer(serializers.ModelSerializer):
                   'order_number',
                  'status',
                  'delivery_date')
+
+
+class CitiesSerializer(serializers.ModelSerializer):
+
+    class Meta: 
+        model = Cities
+        fields = ('id',
+                'cities')

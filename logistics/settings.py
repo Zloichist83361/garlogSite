@@ -9,8 +9,6 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-from common.views import about_us_page
-from os.path import join
 from pathlib import Path
 import os
 
@@ -55,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'ckeditor',
     'ckeditor_uploader',
+    'crispy_forms',
 
 ]
 
@@ -132,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -221,20 +220,9 @@ CKEDITOR_CONFIGS = {
 
 SITE_ID = 1
 
-LOGIN_URL = '/accounts/signin'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'n.chistyak0v322@gmail.com'
-EMAIL_HOST_PASSWORD = 'Okeygoogle322'
-
-
-DJEYM_YMAPS_API_KEY = 'a599779a-91be-40aa-9a21-e4048d756cd1'
-DJEYM_YMAPS_API_KEY_FOR_ENTERPRISE = False
