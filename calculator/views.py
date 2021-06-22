@@ -1,6 +1,6 @@
+from consignment.models import Cities
 from django.shortcuts import render
-from django.http.response import JsonResponse
-from django.views.generic import ListView
+from django.http.response import HttpResponse, JsonResponse
 
 from rest_framework import status
 from rest_framework.parsers import JSONParser 
@@ -12,24 +12,29 @@ from calculator.serializers import CalculateSerializer, TermSerializer
 import json
 # Create your views here.
 
-def calc(req):
+def calc(request):
 
-    dataPrice = list(Calculate.objects.values())
-    responsePrice = json.dumps(dataPrice)
-
-    price = responsePrice[1]
-
-    dataTerm = list(Term.objects.values())
-    responseTerm = json.dumps(dataTerm)
-    
-    context = {
-        'is_worker': req.user.groups.filter(name='worker').exists(),
-        'responseAll': responsePrice + responseTerm,
-        'price': price,
+    context = { 
+        'is_worker': request.user.groups.filter(name='worker').exists(),
     }
+    
+    return render(request, 'calculator.html', context)
 
-    return render(req, 'calculator.html', context)
 
+def get_cities(request):
+    if request.is_ajax():
+        q = request.GET.get('cities')
+        all_city = Cities.objects.filter(cities__icontains=q)
+        results = []
+        for city in all_city:
+            city_json = {}
+            city_json = city.cities
+            results.append(city_json)
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
 
 
 @api_view(['GET', 'POST'])

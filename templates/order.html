@@ -5,31 +5,21 @@
 
 
 
+     
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" /> 
 
-
-
-
-
-
-
-
-
-
-
-
-</div>
 {% block base_content %}  
 
 <h4 class="mb-4 text-center text-uppercase subtitle" style="margin-top: 55px;">Расчет и оформление заказа</h4>
 <div class="container" style="color: #3D3935;">
     <div class="jumbotron">
-    <form  method="post">
+    <form action="{% url 'order' %}" method="POST" >
       {% csrf_token %}
         <div class="row mb-3">
             <div class="form-group col-md-6 col-sm-6">
               {{ form.city_to|as_crispy_field }}
-                <!--<p class="">Откуда</p>-->
-                <!--<input type="text"  class="form-control" id="cityfrom"  required="" />-->
+                <!--<p class="">Откуда *</p>
+                <input type="text"  class="form-control" id="city_to" name="city_to"  required="" />-->
                
                     <div class="form-check form-check-inline">
                    
@@ -43,6 +33,7 @@
                       </div>   
                       
                       <div id="addressYes" style="display: none;">
+                
                         {{ form.address_from|as_crispy_field }}
                       </div>
                       <div id="termYes" style="display: none;">
@@ -73,8 +64,9 @@
         </div>
         <div class="row mb-3">
             <div class="form-group col-md-6 col-sm-6">
-                <p class="">Дата забора груза</p>
-                <input type="date" class="form-control" required="" value="{{ orderconsignment.date_cargo}}" />
+              {{ form.date_cargo|as_crispy_field }}
+                <!--<p class="">Дата забора груза</p>
+                <input type="date" class="form-control" required="" value="{{ orderconsignment.date_cargo}}" />-->
             </div>
             <div class="form-group col-md-6 col-sm-6">
               {{ form.type_transporation|as_crispy_field }}
@@ -131,100 +123,82 @@
                   </ul>
                   <div class="tab-content p-3">
                     <div class="tab-pane fade show active" id="onePlace">
-                        <form>
+                        
                             <div class="row">
                               <div class="col-md-4 col-sm-6 ">
-                                  <p>Длина</p>
-                                <input type="text" class="form-control">
+                                {{ form.length_one|as_crispy_field }}
                               </div>
                               <div class="col-md-4 col-sm-6">
-                                  <p>Ширина</p>
-                                <input type="text" class="form-control">
+                                {{ form.width_one|as_crispy_field }}
                               </div>
                               <div class="col-md-4 col-sm-6">
-                                <p>Высота</p>
-                              <input type="text" class="form-control">
+                                {{ form.height_one|as_crispy_field }}
                             </div>
                         
                             <div class="col-md-4 col-sm-6 ">
-                                <p>Вес</p>
-                              <input type="text" class="form-control">
+                              {{ form.weight_one|as_crispy_field }}
                             </div>
                             <div class="col-md-4 col-sm-6">
-                                <p>Объем</p>
-                              <input type="text" class="form-control">
+                              {{ form.volume_one|as_crispy_field }}
                             </div>
                             <div class="col-md-4 col-sm-6">
-                                <p>Количество</p>
-                              <input type="text" class="form-control">
+                              {{ form.place_quantity|as_crispy_field }}
                             </div>
                             </div>
-                          </form>
+                         
                     </div>
                     <div class="tab-pane fade" id="serveralPlaces">
-                        <form>
+                       
                             <div class="row">
                               <div class="col-md-3 col-sm-6 ">
-                                  <p>Общий вес</p>
-                                <input type="text" class="form-control">
+                                {{ form.some_weight|as_crispy_field }}
                               </div>
                               <div class="col-md-3 col-sm-6">
-                                  <p>Общий объем</p>
-                                <input type="text" class="form-control">
+                                {{ form.some_volume|as_crispy_field }}
                               </div>
                               <div class="col-md-3 col-sm-6">
-                                <p>Кол-во мест</p>
-                              <input type="text" class="form-control">
+                                {{ form.some_place_quantity|as_crispy_field }}
                             </div>
                         
                             <div class="col-md-3 col-sm-6 ">
-                                <p>Самое длинное</p>
-                              <input type="text" class="form-control">
+                              {{ form.some_longest|as_crispy_field }}
                             </div>
                             <div class="col-md-3 col-sm-6">
-                                <p>Самое широкое</p>
-                              <input type="text" class="form-control">
+                              {{ form.some_widest|as_crispy_field }}
                             </div>
                             <div class="col-md-3 col-sm-6">
-                                <p>Самое высокое</p>
-                              <input type="text" class="form-control">
+                              {{ form.some_highest|as_crispy_field }}
                             </div>
                             <div class="col-md-3 col-sm-6">
-                                <p>Самое тяжелое</p>
-                              <input type="text" class="form-control">
+                              {{ form.some_hardest|as_crispy_field }}
                             </div>
                             <div class="col-md-3 col-sm-6">
-                              <br>
-                              <br>
+                              <br>                
                                 <a href="#" style="color: red;" data-mdb-toggle="tooltip" title="Грузовое место считается негабаритным,если 
   - вес места не менее 500 кг или 
   - одно из измерений равно или более 3 метров">(!)Негабарит</a>
                             </div>
                             </div>
-                          </form>
+                         
                     </div>
                     <div class="tab-pane fade" id="documentation">
-                        <form>
+                      
                             <div class="row">
                               <div class="col-md-6 col-sm-6 ">
-                                  <p>Длина(см)</p>
-                                <input type="text" class="form-control" placeholder="макс 31">
+                                {{ form.document_length|as_crispy_field }}
                               </div>
                               <div class="col-md-6 col-sm-6">
-                                  <p>Ширина(см)</p>
-                                <input type="text" class="form-control" placeholder="макс 25">
+                                {{ form.document_width|as_crispy_field }}
                               </div>
                               <div class="col-md-6 col-sm-6">
-                                <p>Высота(см)</p>
-                              <input type="text" class="form-control" placeholder="макс 4">
+                                {{ form.document_height|as_crispy_field }}
                             </div>
                         
                             <div class="col-md-6 col-sm-6 ">
-                                <p>Вес(кг)</p>
-                              <input type="text" class="form-control" placeholder="макс 2">
+                              {{ form.document_weight|as_crispy_field }}
                             </div>
                             </div>
-                          </form>
+                       
                     </div>
                   </div>
             </div>
@@ -390,7 +364,7 @@
                   </div>
                   <div id="collapseThree" class="collapse text-center" aria-labelledby="headingThree" data-parent="#accordionExample">
                     <div class="card-body">
-                        <form>
+                        
                             <div class="row">
                                 <div class="form-group col-md-6 col-sm-6">
                                     <p class="font-weight-bold">Отправитель</p>
@@ -494,8 +468,6 @@
                                       {{ form.recipient_customer|as_crispy_field }}   
                                       &nbsp;
                                       &nbsp;     
-                                      
-                                   
                                         <div class="form-check">             
                                           <input type="checkbox" class="checkboxinput form-check-input" id="thirdP1" onclick="check()">
                                         <label for="thirdP1" class="form-check-label">
@@ -509,7 +481,7 @@
                                       </div> 
                                     </div>
                             </div>
-                          </form>
+                         
                         </div>
                     </div>
                   </div>
@@ -526,19 +498,15 @@
             </div>
             
             <!--Button-->
-            <div class="col-md-12 col-12 ">        
-                <input type="button" style="background-color: #3D3935; border-color: #3D3935;" id="btn" class="btn btn-primary btn-lg btn-block" value="Оформить заказ"/>
-            </div>
+              <button type="submit" style="background-color: #3D3935; border-color: #3D3935;" id="btn" class="btn btn-primary btn-lg btn-block">Оформить заказ</button>
+            
         </div>
     </form>
     
     </div>
 </div>
-<script src="http://code.jquery.com/jquery-1.9.1.js">
-</script>
-<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js">
-</script>
-<script type="text/javascript" src="{% static 'bootstrap-tab.js' %}">  </script>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
 <script type="text/javascript">
 

@@ -5,12 +5,11 @@
 
 
 {% block base_content %}
-
-
 <h4 class="mb-4 text-center text-uppercase subtitle" style="margin-top: 55px;">Калькулятор</h4>
 <div class="container">
     <div class="jumbotron">
-    <form>
+    <form action="{% url 'calc' %}" method="POST" >
+      {% csrf_token %}
         <div class="row mb-3">
             <div class="form-group col-md-6 col-sm-6">
                 <p class="">Откуда</p>
@@ -80,12 +79,9 @@
     </form>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 <script>
-
-
-
-  let resposneAll = "{{responseAll|escapejs}}"
-  console.log(resposneAll)
 
   let req = new XMLHttpRequest();
   let cityfrom = document.getElementById('cityfrom').value;
@@ -95,6 +91,24 @@
   let volume = document.getElementById('volume').value;
   let pickUp = document.getElementById('pickUp').checked;
   let delivery = document.getElementById('delivery').checked;
+  let st_price = document.getElementById('st_price');
+  let st_time = document.getElementById('st_time');
+  let ex_price = document.getElementById('ex_price');
+  let ex_time = document.getElementById('ex_time');
+
+  let struct = {
+    cityfrom: cityfrom,
+    cityto: cityto,
+    quantity: quantity,
+    weight: weight,
+    volume: volume,
+    pickUp: pickUp,
+    delivery: delivery
+  };
+
+  req.open('GET', '/calc?' + "params=" + struct, true)
+  req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+  req.send();
 
   let btn = document.getElementById('btn');
   let standartCost = document.getElementById('standartCost');
@@ -113,6 +127,8 @@
     })
 
 </script>
+
+
 <style>
   .reveal{
     visibility: visible;

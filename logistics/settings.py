@@ -99,8 +99,8 @@ WSGI_APPLICATION = 'logistics.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myprojectgl', 
-        'USER': 'myprojectusergl', 
+        'NAME': 'glgl', 
+        'USER': 'glgluser', 
         'PASSWORD': 'password',
         'HOST': '127.0.0.1', 
         'PORT': '5432',

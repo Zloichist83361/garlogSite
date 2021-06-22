@@ -56,37 +56,37 @@ class OrderConsignment(models.Model):
     )
     city_to = models.CharField(verbose_name='Откуда', max_length=255, blank=False, unique=True)
     city_from = models.CharField(verbose_name='Куда', max_length=255, blank=False, unique=True)
-    address_from = models.CharField(verbose_name='Адрес', max_length=255, blank=False)
-    terminal_from = models.CharField(verbose_name='Терминал', max_length=255, blank=False)
-    address_to = models.CharField(verbose_name='Адрес', max_length=255, blank=False)
-    terminal_to = models.CharField(verbose_name='Терминал', max_length=255, blank=False)
-    date_cargo = models.DateTimeField('Дата забора груза')
+    address_from = models.CharField(verbose_name='Адрес', max_length=255, blank=True)
+    terminal_from = models.CharField(verbose_name='Терминал', max_length=255, blank=True)
+    address_to = models.CharField(verbose_name='Адрес', max_length=255, blank=True)
+    terminal_to = models.CharField(verbose_name='Терминал', max_length=255, blank=True)
+    date_cargo = models.DateField('Дата забора груза')
     type_transporation = models.CharField(verbose_name='Вид перевозки',choices=TYPE_TRANS, max_length=50, default='Стандарт')
     nature_cargo = models.CharField(verbose_name='Характер груза', max_length=255, blank=False)
     #интервал
     interval = models.CharField(verbose_name='Интервал доставки', choices=INTERVAL, max_length=50, default='9:00 - 18:00')
     #1место
-    length_one = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
-    width_one = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
-    height_one = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
-    weight_one = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
-    volume_one = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
-    place_quantity = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
+    length_one = models.IntegerField(verbose_name='Длина', default='', blank=True, null=True)
+    width_one = models.IntegerField(verbose_name='Ширина', default='', blank=True, null=True)
+    height_one = models.IntegerField(verbose_name='Высота', default='', blank=True, null=True)
+    weight_one = models.IntegerField(verbose_name='Вес', default='', blank=True, null=True)
+    volume_one = models.IntegerField(verbose_name='Объем', default='', blank=True, null=True)
+    place_quantity = models.IntegerField(verbose_name='Количество', default='', blank=True, null=True)
     #несколько мест
-    some_weight = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
-    some_volume = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
-    some_place_quantity = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
-    some_longest = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
-    some_widest = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
-    some_highest = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
-    some_hardest = models.PositiveIntegerField(validators=[MinValueValidator(0.001)], default='')
+    some_weight = models.IntegerField(verbose_name='Общий вес', default='', blank=True, null=True)
+    some_volume = models.IntegerField(verbose_name='Общий объем', default='', blank=True, null=True)
+    some_place_quantity = models.IntegerField(verbose_name='Кол-во мест', default='', blank=True, null=True)
+    some_longest = models.IntegerField(verbose_name='Самое длинное',  default='', blank=True, null=True)
+    some_widest = models.IntegerField(verbose_name='Самое широкое', default='', blank=True, null=True)
+    some_highest = models.IntegerField(verbose_name='Самое высокое',  default='', blank=True, null=True)
+    some_hardest = models.IntegerField(verbose_name='Самое тяжелое', default='', blank=True, null=True)
     #документы
-    document_length = models.PositiveIntegerField(validators=[MinValueValidator(0.001),MaxValueValidator(31)], default='')
-    document_width = models.PositiveIntegerField(validators=[MinValueValidator(0.001),MaxValueValidator(25)], default='')
-    document_height = models.PositiveIntegerField(validators=[MinValueValidator(0.001),MaxValueValidator(4)], default='')
-    document_weight =  models.PositiveIntegerField(validators=[MinValueValidator(0.001),MaxValueValidator(2)], default='')
+    document_length = models.IntegerField(verbose_name='Длина(см)', validators=[MaxValueValidator(31)], default='', blank=True, null=True)
+    document_width = models.IntegerField(verbose_name='Ширина(см)', validators=[MaxValueValidator(25)], default='', blank=True, null=True)
+    document_height = models.IntegerField(verbose_name='Высота(см)', validators=[MaxValueValidator(4)], default='', blank=True, null=True)
+    document_weight =  models.IntegerField(verbose_name='Вес(кг)',validators=[MaxValueValidator(2)], default='', blank=True, null=True)
     #доп услуги
-    declared_value = models.PositiveIntegerField(verbose_name='Объявленная стоимость', max_length=255, blank=False, default='')
+    declared_value = models.IntegerField(verbose_name='Объявленная стоимость', max_length=255, blank=True, null=True)
     insurance = models.BooleanField(verbose_name='Страховка', default=False)
     return_of_accompanying_documents = models.BooleanField(verbose_name='Возврат сопроводительных документов', default=False)
     sending_accompanying_documents = models.BooleanField(verbose_name='Отправка сопроводительных документов', default=False)
@@ -112,16 +112,16 @@ class OrderConsignment(models.Model):
     air_bubble = models.BooleanField(verbose_name='Воздушно - пузырьковая пленка', default=False)
     #участники грузоперевозок
     #физлицо
-    fio_individual = models.CharField(verbose_name='ФИО', max_length=255, blank=False, default='')
-    passport_individual = models.PositiveIntegerField(verbose_name='Серия и номер паспорта', max_length=10, blank=False, default='')
-    email_individual = models.EmailField(verbose_name='Email', max_length=255, blank=False, default='')
-    phone_individual = PhoneNumberField(verbose_name='Контактный телефон', null=False, blank=False, unique=True, default='')
+    fio_individual = models.CharField(verbose_name='ФИО', max_length=255, blank=True, default='', null=True)
+    passport_individual = models.IntegerField(verbose_name='Серия и номер паспорта', max_length=10, blank=True, default='', null=True)
+    email_individual = models.EmailField(verbose_name='Email', max_length=255, blank=True, default='', null=True)
+    phone_individual = PhoneNumberField(verbose_name='Контактный телефон', blank=True, unique=True, default='', null=True)
     #юрлицо
-    fio_entity = models.CharField(verbose_name='Название компании', max_length=255, blank=False, default='')
-    inn_entity = models.PositiveIntegerField(verbose_name='ИНН', max_length=12, blank=False, default='')
-    contact_person_entity = models.CharField(verbose_name='Контактное лицо', max_length=255, blank=False, default='')
-    email_entity = models.EmailField(verbose_name='Email', max_length=255, blank=False, default='')
-    phone_entity = PhoneNumberField(verbose_name='Контактный телефон', null=False, blank=False, unique=True, default='')
+    fio_entity = models.CharField(verbose_name='Название компании', max_length=255, blank=True, default='', null=True)
+    inn_entity = models.IntegerField(verbose_name='ИНН', max_length=12, blank=True, default='', null=True)
+    contact_person_entity = models.CharField(verbose_name='Контактное лицо', max_length=255, blank=True, default='', null=True)
+    email_entity = models.EmailField(verbose_name='Email', max_length=255, blank=True, default='', null=True)
+    phone_entity = PhoneNumberField(verbose_name='Контактный телефон', blank=True, unique=True, default='', null=True)
     #плательщик
     sender_payer = models.BooleanField(verbose_name='Отправитель', default=False)
     recipient_payer = models.BooleanField(verbose_name='Получатель', default=False)
@@ -131,7 +131,7 @@ class OrderConsignment(models.Model):
     recipient_customer = models.BooleanField(verbose_name='Получатель', default=False)
     third_person_customer = models.BooleanField(verbose_name='Третье лицо', default=False)
     #третье лицо
-    third_person = models.CharField(verbose_name='Город, имя, телефон', max_length=300,blank=False, default='')
+    third_person = models.CharField(verbose_name='Город, имя, телефон', max_length=300,blank=True, default='')
     pay_cargo = models.CharField(verbose_name='Форма оплаты', choices=PAY, max_length=50, default='Наличный расчет')
 
 
@@ -160,5 +160,5 @@ class OrderStatusConsignment(models.Model):
 class Cities(models.Model):
     cities = models.CharField(max_length=255)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.cities
