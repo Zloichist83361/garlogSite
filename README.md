@@ -1,3 +1,3 @@
 
 # Сайт Гарант - Логистика
-Стек: Django, PostgreSQL, HMTL/CSS/JavaScript, Bootstrap
+Стек: Django, DRF, PostgreSQL, HMTL/CSS/JavaScript, Bootstrap
