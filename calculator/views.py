@@ -31,7 +31,7 @@ def calc_post(request):
     res_calc = {
         'cityto': response[0][0],
         'cityfrom': response[0][1],    
-        'weightto': response[0][2],
+        'weightto': response[0][2],  
         'weightfrom': response[0][3],
         'inter_terminal': response[0][4],
         'pickup': response[0][5],
