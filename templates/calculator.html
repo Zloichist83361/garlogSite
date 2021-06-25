@@ -66,66 +66,78 @@
               </table>
               
               <div class="col-md-12 col-12 ">
-                <input type="button" style="background-color: #3D3935; border-color: #3D3935;"  id="btn" class="btn btn-primary btn-lg btn-block" value="Рассчитать"/>
+                <input type="button" style="background-color: #3D3935; border-color: #3D3935;"  id="btn" class="btn btn-primary btn-lg btn-block" value="Рассчитать" onclick="calc()"/>
               </div>
             </div>
-              <div class="row mb-3">
+              <div class="row mb-3"> 
               <div class="col-md-12 col-12 ">
                <a href="/order/" style="visibility: hidden; text-decoration: none; " target="_blank"> <input type="button" style="background-color: #3D3935; border-color: #3D3935;"  id="orderBtn" class="btn btn-primary btn-lg btn-block" value="Оформить заявку"/> </a>
               </div>
             </div>
-
-        
     </form>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 <script>
+    function calc(){
+      let req = new XMLHttpRequest();
+      let cityfrom = document.getElementById('cityfrom').value;
+      let cityto = document.getElementById('cityto').value;
+      let quantity = document.getElementById('quantity').value;
+      let weight = document.getElementById('weight').value;
+      let volume = document.getElementById('volume').value;
+      let pickUp = document.getElementById('pickUp').checked;
+      let delivery = document.getElementById('delivery').checked;
 
-  let req = new XMLHttpRequest();
-  let cityfrom = document.getElementById('cityfrom').value;
-  let cityto = document.getElementById('cityto').value;
-  let quantity = document.getElementById('quantity').value;
-  let weight = document.getElementById('weight').value;
-  let volume = document.getElementById('volume').value;
-  let pickUp = document.getElementById('pickUp').checked;
-  let delivery = document.getElementById('delivery').checked;
-  let st_price = document.getElementById('st_price');
-  let st_time = document.getElementById('st_time');
-  let ex_price = document.getElementById('ex_price');
-  let ex_time = document.getElementById('ex_time');
+      let standartCost = document.getElementById('standartCost');
+      let standartTerm = document.getElementById('standartTerm');
+      let expressCost = document.getElementById('expressCost');
+      let expressTerm = document.getElementById('expressTerm');
+      
+      let struct = {
+        cityfrom: cityfrom,
+        cityto: cityto,
+        quantity: quantity,
+        weight: weight,
+        volume: volume,
+        pickUp: pickUp,
+        delivery: delivery
+      };
+      console.log(struct)
 
-  let struct = {
-    cityfrom: cityfrom,
-    cityto: cityto,
-    quantity: quantity,
-    weight: weight,
-    volume: volume,
-    pickUp: pickUp,
-    delivery: delivery
-  };
+      if (cityto != '' && cityfrom != '' && quantity != '' && weight != '' && volume != ''){
+        req.onload = function(){
+          let res_calc = JSON.parse(this.responseText);
+          if (res_calc.inter_terminal){
+            st_full = 0;
+            ex_full = 0;
+            if (pickUp == true){
+              st_full = st_full + res_calc.pickup;
+              ex_full = ex_full + res_calc.pickup;
+            }
+            if (delivery == true) {
+              st_full = st_full + res_calc.cargo_delivery;
+              ex_full = ex_full + res_calc.cargo_delivery;
+            }
 
-  req.open('GET', '/calc?' + "params=" + struct, true)
-  req.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-  req.send();
+            st_full = st_full + res_calc.inter_terminal;
+            ex_full = ex_full + res_calc.inter_terminal;
 
-  let btn = document.getElementById('btn');
-  let standartCost = document.getElementById('standartCost');
-  let standartTerm = document.getElementById('standartTerm');
-  let expressCost = document.getElementById('expressCost');
-  let expressTerm = document.getElementById('expressTerm');
-  let orderButton = document.getElementById('orderBtn');
+            standartCost.innerHTML = st_full + " р. ";
+            standartTerm.innerHTML = 3 - 5;
+            expressCost.innerHTML = ex_full + " р. ";
+            expressTerm.innerHTML = 1 - 3;
 
-    btn.addEventListener("click", () => {
-      standartCost.innerHTML = 300;
-      standartTerm.innerHTML = 1 + '-' + 3;
-      expressCost.innerHTML = 400;
-      expressTerm.innerHTML = 1 ;
+          }
+          
+        }
+        req.open('GET', '/calc/', struct, true);
+        req.setRequestHeader('content-type', 'application/json; charset=UTF-8');
+        req.send();
+      }
+    };
 
-      orderButton.classList.add("reveal");
-    })
-
+ 
 </script>
 
 

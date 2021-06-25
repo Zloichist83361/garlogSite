@@ -1,6 +1,5 @@
-from consignment.models import Cities
 from django.shortcuts import render
-from django.http.response import HttpResponse, JsonResponse
+from django.http.response import JsonResponse
 
 from rest_framework import status
 from rest_framework.parsers import JSONParser 
@@ -20,21 +19,26 @@ def calc(request):
     
     return render(request, 'calculator.html', context)
 
+def calc_post(request):
+    struct = request.POST.get('struct')
+    weight = float(struct[3])
+    volume = float(struct[4])
+    volume_weight = volume * 240
+    max_weight = max(weight, volume_weight)
+    
+    response = Calculate.objects.filter(cityto__exact=struct[0]).filter(cityfrom__exact=struct[1]).filter(weightto__gte=str(max_weight))
+    #response_term = Term.objects.filter(cityto__exact=struct[0]).filter(cityfrom__exact=struct[1]).filter
+    res_calc = {
+        'cityto': response[0][0],
+        'cityfrom': response[0][1],    
+        'weightto': response[0][2],
+        'weightfrom': response[0][3],
+        'inter_terminal': response[0][4],
+        'pickup': response[0][5],
+        'cargo_delivery': response[0][6],
+    }
 
-def get_cities(request):
-    if request.is_ajax():
-        q = request.GET.get('cities')
-        all_city = Cities.objects.filter(cities__icontains=q)
-        results = []
-        for city in all_city:
-            city_json = {}
-            city_json = city.cities
-            results.append(city_json)
-        data = json.dumps(results)
-    else:
-        data = 'fail'
-    mimetype = 'application/json'
-    return HttpResponse(data, mimetype)
+    return json.dumps(res_calc)
 
 
 @api_view(['GET', 'POST'])
@@ -99,8 +103,6 @@ def update_term(request, pk):
             term_api_serializer.save()
             return JsonResponse(term_api_serializer.data, safe=False, status=status.HTTP_201_CREATED)
         return JsonResponse(term_api_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 
 
 

@@ -15,6 +15,7 @@ class Calculate(models.Model):
         return self.cityto
 
 
+
 class Term(models.Model):
     cityto = models.CharField(max_length=255, blank=False)
     cityfrom = models.CharField(max_length=255, blank=False)
