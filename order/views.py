@@ -14,6 +14,12 @@ def order(request):
         form = OrderForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('thanks.html')
-        print(form.errors)
+            return redirect('thanks')
     return render(request, 'order.html', {'form':form})
+
+
+def thanks(request):
+    context = {
+         'is_worker': request.user.groups.filter(name='worker').exists(),
+    }
+    return render(request, 'thanks.html', context)
