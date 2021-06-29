@@ -1,7 +1,5 @@
-from django import forms
-from django.core import validators
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator
 
 from phonenumber_field.modelfields import PhoneNumberField
 
