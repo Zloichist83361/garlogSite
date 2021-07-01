@@ -1,9 +1,6 @@
-from decimal import Context
-import json
-from django.db.models import query
 from django.http.response import JsonResponse
 from django.shortcuts import render
-from django.views.generic import ListView
+
 
 from rest_framework import status
 from rest_framework.parsers import JSONParser 
@@ -124,4 +121,3 @@ def db(request):
     }
     
     return render(request, 'db.html', context)
-

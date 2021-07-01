@@ -17,7 +17,9 @@
       {% csrf_token %}
         <div class="row mb-3">
             <div class="form-group col-md-6 col-sm-6">
+              <div class="ui-widget">
               {{ form.city_to|as_crispy_field }}
+            </div>
                 <!--<p class="">Откуда *</p>
                 <input type="text"  class="form-control" id="city_to" name="city_to"  required="" />-->
                
@@ -480,6 +482,9 @@
                                         {{ form.third_person|as_crispy_field }} 
                                       </div> 
                                     </div>
+                                    <div class="form-group col-md-6 col-sm-6">
+                                      {{ form.pay_cargo|as_crispy_field }}
+                                    </div>
                             </div>
                          
                         </div>
@@ -487,15 +492,6 @@
                   </div>
                 </div>
               </div>
-
-            <div class="form-group col-md-4 col-sm-6">
-              {{ form.pay_cargo|as_crispy_field }}
-                <!--<p class="">Форма оплаты</p>
-                <select class="form-control" aria-label="Default select example">
-                    <option value="Наличный расчет">Наличный расчет</option>
-                    <option value="Безналичный расчет">Безналичный расчет</option>
-                  </select>-->
-            </div>
             
             <!--Button-->
               <button type="submit" style="background-color: #3D3935; border-color: #3D3935;" id="btn" class="btn btn-primary btn-lg btn-block">Оформить заказ</button>
@@ -578,8 +574,5 @@
       }
       else document.getElementById('thirdP1Yes').style.display = 'none';
     }
-
-
-    
     </script>
 {% endblock %}

@@ -3,7 +3,6 @@ from django.core.validators import MaxValueValidator
 
 from phonenumber_field.modelfields import PhoneNumberField
 
-
 class TrackStatusConsignment(models.Model):
     STATUS_CHOICES = (
         ('Принято', 'Принято'),
@@ -55,37 +54,37 @@ class OrderConsignment(models.Model):
     )
     city_to = models.CharField(verbose_name='Откуда', max_length=255, blank=False, unique=True)
     city_from = models.CharField(verbose_name='Куда', max_length=255, blank=False, unique=True)
-    address_from = models.CharField(verbose_name='Адрес', max_length=255, blank=True, null=True)
-    terminal_from = models.CharField(verbose_name='Терминал', max_length=255, blank=True, null=True)
-    address_to = models.CharField(verbose_name='Адрес', max_length=255, blank=True, null=True)
-    terminal_to = models.CharField(verbose_name='Терминал', max_length=255, blank=True, null=True)
+    address_from = models.CharField(verbose_name='Адрес*', max_length=255, blank=True, null=True)
+    terminal_from = models.CharField(verbose_name='Терминал*', max_length=255, blank=True, null=True)
+    address_to = models.CharField(verbose_name='Адрес*', max_length=255, blank=True, null=True)
+    terminal_to = models.CharField(verbose_name='Терминал*', max_length=255, blank=True, null=True)
     date_cargo = models.DateField('Дата забора груза')
     type_transporation = models.CharField(verbose_name='Вид перевозки',choices=TYPE_TRANS, max_length=50)
     nature_cargo = models.CharField(verbose_name='Характер груза', max_length=255, blank=False)
     #интервал
     interval = models.CharField(verbose_name='Интервал доставки', choices=INTERVAL, max_length=50)
     #1место
-    length_one = models.DecimalField(verbose_name='Длина(м)', max_digits=5, decimal_places=2, blank=True, null=True)
-    width_one = models.DecimalField(verbose_name='Ширина(м)', max_digits=5, decimal_places=2, blank=True, null=True)
-    height_one = models.DecimalField(verbose_name='Высота(м)', max_digits=5, decimal_places=2, blank=True, null=True)
-    weight_one = models.DecimalField(verbose_name='Вес(кг)' , max_digits=5, decimal_places=2, blank=True, null=True)
-    volume_one = models.DecimalField(verbose_name='Объем(м3)', max_digits=5, decimal_places=2, blank=True, null=True)
-    place_quantity = models.DecimalField(verbose_name='Количество', max_digits=5, decimal_places=2, blank=True, null=True)
+    length_one = models.DecimalField(verbose_name='Длина(м)*', max_digits=5, decimal_places=2, blank=True, null=True, default='0.1')
+    width_one = models.DecimalField(verbose_name='Ширина(м)*', max_digits=5, decimal_places=2, blank=True, null=True, default='0.1')
+    height_one = models.DecimalField(verbose_name='Высота(м)*', max_digits=5, decimal_places=2, blank=True, null=True, default='0.1')
+    weight_one = models.DecimalField(verbose_name='Вес(кг)*' , max_digits=5, decimal_places=2, blank=True, null=True, default='1')
+    volume_one = models.DecimalField(verbose_name='Объем(м3)*', max_digits=5, decimal_places=2, blank=True, null=True, default='0.1')
+    place_quantity = models.DecimalField(verbose_name='Количество*', max_digits=5, decimal_places=2, blank=True, null=True, default='1')
     #несколько мест
-    some_weight = models.DecimalField(verbose_name='Общий вес(кг)', max_digits=5, decimal_places=2, blank=True, null=True)
-    some_volume = models.DecimalField(verbose_name='Общий объем(м3)', max_digits=5, decimal_places=2, blank=True, null=True)
-    some_place_quantity = models.DecimalField(verbose_name='Кол-во мест', max_digits=5, decimal_places=2, blank=True, null=True)
-    some_longest = models.DecimalField(verbose_name='Самое длинное(м)', max_digits=5, decimal_places=2, blank=True, null=True)
-    some_widest = models.DecimalField(verbose_name='Самое широкое(м)', max_digits=5, decimal_places=2, blank=True, null=True)
-    some_highest = models.DecimalField(verbose_name='Самое высокое(м)', max_digits=5, decimal_places=2, blank=True, null=True)
-    some_hardest = models.DecimalField(verbose_name='Самое тяжелое(кг)', max_digits=5, decimal_places=2, blank=True, null=True)
+    some_weight = models.DecimalField(verbose_name='Общий вес(кг)*', max_digits=5, decimal_places=2, blank=True, null=True)
+    some_volume = models.DecimalField(verbose_name='Общий объем(м3)*', max_digits=5, decimal_places=2, blank=True, null=True)
+    some_place_quantity = models.DecimalField(verbose_name='Кол-во мест*', max_digits=5, decimal_places=2, blank=True, null=True)
+    some_longest = models.DecimalField(verbose_name='Самое длинное(м)*', max_digits=5, decimal_places=2, blank=True, null=True)
+    some_widest = models.DecimalField(verbose_name='Самое широкое(м)*', max_digits=5, decimal_places=2, blank=True, null=True)
+    some_highest = models.DecimalField(verbose_name='Самое высокое(м)*', max_digits=5, decimal_places=2, blank=True, null=True)
+    some_hardest = models.DecimalField(verbose_name='Самое тяжелое(кг)*', max_digits=5, decimal_places=2, blank=True, null=True)
     #документы
-    document_length = models.DecimalField(verbose_name='Длина(см)', max_digits=5, decimal_places=2, validators=[MaxValueValidator(31)], blank=True, null=True)
-    document_width = models.DecimalField(verbose_name='Ширина(см)', max_digits=5, decimal_places=2, validators=[MaxValueValidator(25)], blank=True, null=True)
-    document_height = models.DecimalField(verbose_name='Высота(см)', max_digits=5, decimal_places=2, validators=[MaxValueValidator(4)], blank=True, null=True)
-    document_weight =  models.DecimalField(verbose_name='Вес(кг)', max_digits=5, decimal_places=2, validators=[MaxValueValidator(2)], blank=True, null=True)
+    document_length = models.DecimalField(verbose_name='Длина(см)*', max_digits=5, decimal_places=2, validators=[MaxValueValidator(31)], blank=True, null=True, default='31')
+    document_width = models.DecimalField(verbose_name='Ширина(см)*', max_digits=5, decimal_places=2, validators=[MaxValueValidator(25)], blank=True, null=True, default='25')
+    document_height = models.DecimalField(verbose_name='Высота(см)*', max_digits=5, decimal_places=2, validators=[MaxValueValidator(4)], blank=True, null=True, default='3')
+    document_weight =  models.DecimalField(verbose_name='Вес(кг)*', max_digits=5, decimal_places=2, validators=[MaxValueValidator(2)], blank=True, null=True, default='2')
     #доп услуги
-    declared_value = models.DecimalField(verbose_name='Объявленная стоимость', max_digits=5, decimal_places=2, blank=True, null=True)
+    declared_value = models.DecimalField(verbose_name='Объявленная стоимость*', max_digits=5, decimal_places=2, blank=True, null=True)
     insurance = models.BooleanField(verbose_name='Страховка')
     return_of_accompanying_documents = models.BooleanField(verbose_name='Возврат сопроводительных документов')
     sending_accompanying_documents = models.BooleanField(verbose_name='Отправка сопроводительных документов')
@@ -111,16 +110,16 @@ class OrderConsignment(models.Model):
     air_bubble = models.BooleanField(verbose_name='Воздушно - пузырьковая пленка')
     #участники грузоперевозок
     #физлицо
-    fio_individual = models.CharField(verbose_name='ФИО', max_length=255, blank=True, null=True)
-    passport_individual = models.IntegerField(verbose_name='Серия и номер паспорта', blank=True, null=True)
-    email_individual = models.EmailField(verbose_name='Email', max_length=255, blank=True, null=True)
-    phone_individual = PhoneNumberField(verbose_name='Контактный телефон', blank=True, unique=True, null=True)
+    fio_individual = models.CharField(verbose_name='ФИО*', max_length=255, blank=True, null=True)
+    passport_individual = models.IntegerField(verbose_name='Серия и номер паспорта*', blank=True, null=True)
+    email_individual = models.EmailField(verbose_name='Email*', max_length=255, blank=True, null=True)
+    phone_individual = PhoneNumberField(verbose_name='Контактный телефон*', blank=True, unique=True, null=True)
     #юрлицо
-    fio_entity = models.CharField(verbose_name='Название компании', max_length=255, blank=True, null=True)
-    inn_entity = models.IntegerField(verbose_name='ИНН', blank=True, null=True)
-    contact_person_entity = models.CharField(verbose_name='Контактное лицо', max_length=255, blank=True, null=True)
-    email_entity = models.EmailField(verbose_name='Email', max_length=255, blank=True,  null=True)
-    phone_entity = PhoneNumberField(verbose_name='Контактный телефон', blank=True, unique=True,  null=True)
+    fio_entity = models.CharField(verbose_name='Название компании*', max_length=255, blank=True, null=True)
+    inn_entity = models.IntegerField(verbose_name='ИНН*', blank=True, null=True)
+    contact_person_entity = models.CharField(verbose_name='Контактное лицо*', max_length=255, blank=True, null=True)
+    email_entity = models.EmailField(verbose_name='Email*', max_length=255, blank=True,  null=True)
+    phone_entity = PhoneNumberField(verbose_name='Контактный телефон*', blank=True, unique=True,  null=True)
     #плательщик
     sender_payer = models.BooleanField(verbose_name='Отправитель')
     recipient_payer = models.BooleanField(verbose_name='Получатель')
@@ -130,7 +129,7 @@ class OrderConsignment(models.Model):
     recipient_customer = models.BooleanField(verbose_name='Получатель')
     third_person_customer = models.BooleanField(verbose_name='Третье лицо')
     #третье лицо
-    third_person = models.CharField(verbose_name='Город, имя, телефон', max_length=300,blank=True, null=True)
+    third_person = models.CharField(verbose_name='Город, имя, телефон*', max_length=300,blank=True, null=True)
     pay_cargo = models.CharField(verbose_name='Форма оплаты', choices=PAY, max_length=50)
 
 

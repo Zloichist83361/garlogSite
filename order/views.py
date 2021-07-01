@@ -1,10 +1,8 @@
 
-from consignment.models import OrderConsignment
-from django.shortcuts import  get_object_or_404, redirect, render
-from django.views.generic import View
-from order import forms
-from order.forms import OrderForm
+from django.shortcuts import redirect, render
 
+
+from order.forms import OrderForm
 
 # Create your views here.
 
@@ -23,3 +21,4 @@ def thanks(request):
          'is_worker': request.user.groups.filter(name='worker').exists(),
     }
     return render(request, 'thanks.html', context)
+
