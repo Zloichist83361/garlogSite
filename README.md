@@ -1,6 +1,6 @@
 
 # Сайт Гарант - Логистика
-Backend: Django, DRF
+<strong style: color: green>Backend</strong>: Django, DRF
 <br>
 <br>
 Frontend: HTML/CSS/JavaScript, Bootstrap
