@@ -1,10 +1,10 @@
 
 # Сайт Гарант - Логистика
-<strong style: color: green>Backend</strong>: Django, DRF
+<strong>Backend</strong>: Django, DRF
 <br>
 <br>
-Frontend: HTML/CSS/JavaScript, Bootstrap
+<strong>Frontend</strong>: HTML/CSS/JavaScript, Bootstrap
 <br>
 <br>
-DevOps: Jenkins, Ngnix, Docker, Gunicorn
+<strong>DevOps</strong>: Jenkins, Ngnix, Docker, Gunicorn
 
