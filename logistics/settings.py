@@ -11,6 +11,17 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from pathlib import Path
 import os
+import sentry_sdk
+from sentry_sdk import integrations
+from sentry_sdk.integrations.django import DjangoIntegration
+
+
+sentry_sdk.init(
+    dsn="https://2f6a5f0089ed4b1181dae9480ab9dc58@o908609.ingest.sentry.io/5844301",
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,
+    send_default_pii=True
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +36,7 @@ SECRET_KEY = 'django-insecure-%x-07l91p&hm0ff3nh%8cyojdzw)4mqcfl=@no9pj62&oj%@(r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['f6eb79e4b1d3.ngrok.io']
 
 # Application definition
 

@@ -239,13 +239,23 @@
                                     <!--<input type="checkbox" id="additionalServices2" name="mess" class="custom-control-input"/>
                                     <label class="custom-control-label" for="additionalServices2">Отправка сопроводительных документов</label>-->
                                 </div>
-                                <div class="form-group form-check" style="visibility: visible;">
+                                <div class="form-group form-check" id="prr" style="visibility: visible;" onclick="checkPRR()">
                                   {{ form.loading_and_unloading_sender|as_crispy_field }}
+                                  <div class="col-md-6 col-sm-6" id="prrYes"> 
+                                    {{ form.service_lift_sender|as_crispy_field }}
+                                    {{ form.floor_sender|as_crispy_field }}
+                                    {{ form.carry_sender|as_crispy_field }}
+                                  </div>
                                     <!--<input type="checkbox" id="additionalServices3" name="mess" class="custom-control-input"/>
                                     <label class="custom-control-label" for="additionalServices3">Погрузо-разгрузочные работы у отправителя</label>-->
                                 </div>
-                                <div class="form-group form-check" style="visibility: visible;">
+                                <div class="form-group form-check" id="prr1" style="visibility: visible;" onclick="checkPRR()">
                                   {{ form.loading_and_unloading_recipient|as_crispy_field }}
+                                  <div class="col-md-6 col-sm-6"  id="prr1Yes">
+                                    {{ form.service_lift_recipient|as_crispy_field }}
+                                    {{ form.floor_recipient|as_crispy_field }}
+                                    {{ form.carry_recipient|as_crispy_field }}
+                                  </div>
                                    <!--<input type="checkbox" id="additionalServices4" name="mess" class="custom-control-input"/>
                                     <label class="custom-control-label" for="additionalServices4">Погрузо-разгрузочные работы у получателя</label>-->
                                 </div>
@@ -271,6 +281,9 @@
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.cod|as_crispy_field }}
+                                  <div class="col-md-6 col-sm-6">
+                                    {{ form.cod_input|as_crispy_field }}
+                                  </div>
                                     <!--<input type="checkbox" id="additionalServices9" name="mess" class="custom-control-input"/>
                                     <label class="custom-control-label" for="additionalServices9">Наложенный платеж</label>-->
                                 </div>
@@ -573,6 +586,18 @@
         document.getElementById('thirdP1Yes').style.display = 'block';
       }
       else document.getElementById('thirdP1Yes').style.display = 'none';
+    }
+
+    function checkPRR(){
+      if (document.getElementById('id_loading_and_unloading_sender').checked) {
+        document.getElementById('div_id_service_lift_sender').style.display = 'block';
+      }
+      else document.getElementById('div_id_service_lift_sender').style.display = 'none';
+
+      if (document.getElementById('prr1').checked) {
+        document.getElementById('prr1Yes').style.display = 'block';
+      }
+      else document.getElementById('prr1Yes').style.display = 'none';
     }
     </script>
 {% endblock %}

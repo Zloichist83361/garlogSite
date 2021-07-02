@@ -35,7 +35,6 @@ sitemaps = {
 admin.site.index_template = 'admin/custom_index.html'
 admin.autodiscover()
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
