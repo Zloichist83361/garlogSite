@@ -52,6 +52,13 @@ class OrderConsignment(models.Model):
         ('12:00 - 21:00', '12:00 - 21:00'),
         ('15:00 - 00:00', '15:00 - 00:00'),
     )
+    DOCUMENTS = (
+        ('Паспорт', 'Паспорт'),
+        ('Заграничный паспорт', 'Заграничный паспорт'),
+        ('Военный билет', 'Военный билет'),
+        ('Водительское удостоверение', 'Водительское удостоверение'),
+    )
+
     city_to = models.CharField(verbose_name='Откуда', max_length=255, blank=False, unique=True)
     city_from = models.CharField(verbose_name='Куда', max_length=255, blank=False, unique=True)
     address_from = models.CharField(verbose_name='Адрес*', max_length=255, blank=True, null=True)
@@ -118,7 +125,8 @@ class OrderConsignment(models.Model):
     #участники грузоперевозок
     #физлицо
     fio_individual = models.CharField(verbose_name='ФИО*', max_length=255, blank=True, null=True)
-    passport_individual = models.IntegerField(verbose_name='Серия и номер паспорта*', blank=True, null=True)
+    documents = models.CharField(verbose_name='Выберите тип документа*', choices=DOCUMENTS, max_length=50, default='', blank=True, null=True)
+    passport_individual = models.CharField(verbose_name='Серия и номер выбранного документа*', max_length=11, blank=True, null=True)
     email_individual = models.EmailField(verbose_name='Email*', max_length=255, blank=True, null=True)
     phone_individual = PhoneNumberField(verbose_name='Контактный телефон*', blank=True, unique=True, null=True)
     #юрлицо
@@ -130,13 +138,12 @@ class OrderConsignment(models.Model):
     #плательщик
     sender_payer = models.BooleanField(verbose_name='Отправитель')
     recipient_payer = models.BooleanField(verbose_name='Получатель')
-    third_person_payer = models.BooleanField(verbose_name='Третье лицо')
     #заказчик
     sender_customer = models.BooleanField(verbose_name='Отправитель')
     recipient_customer = models.BooleanField(verbose_name='Получатель')
-    third_person_customer = models.BooleanField(verbose_name='Третье лицо')
     #третье лицо
-    third_person = models.CharField(verbose_name='Город, имя, телефон*', max_length=300,blank=True, null=True)
+    third_person_input_payer = models.CharField(verbose_name='Город, имя, телефон*', max_length=300, blank=True, null=True)
+    third_person_input_customer = models.CharField(verbose_name='Город, имя, телефон*', max_length=300, blank=True, null=True)
     pay_cargo = models.CharField(verbose_name='Форма оплаты', choices=PAY, max_length=50)
 
 

@@ -5,6 +5,7 @@ from django.contrib.flatpages.models import FlatPage
 from django.db import models
 
 from .models import Post
+
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 # Register your models here.
 
@@ -22,12 +23,14 @@ class PostAdminForm(forms.ModelForm):
         model = Post
         fields = '__all__'
 
+
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'status','created_on')
     form = PostAdminForm
     list_filter = ("status",)
     search_fields = ['title', 'text']
     prepopulated_fields = {'slug': ('title',)}
+
 
 admin.site.register(Post, PostAdmin)
 admin.site.unregister(FlatPage)

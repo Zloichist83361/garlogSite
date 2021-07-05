@@ -103,15 +103,3 @@ def update_term(request, pk):
             term_api_serializer.save()
             return JsonResponse(term_api_serializer.data, safe=False, status=status.HTTP_201_CREATED)
         return JsonResponse(term_api_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-def db(request):
-    queryset_calc = Calculate.objects.all()
-    queryset_term = Term.objects.all()
-    context = {
-        'calcs': queryset_calc,
-        'terms': queryset_term,
-    }
-    
-    return render(request, 'db.html', context)

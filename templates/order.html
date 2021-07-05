@@ -20,8 +20,7 @@
               <div class="ui-widget">
               {{ form.city_to|as_crispy_field }}
             </div>
-                <!--<p class="">Откуда *</p>
-                <input type="text"  class="form-control" id="city_to" name="city_to"  required="" />-->
+
                
                     <div class="form-check form-check-inline">
                    
@@ -44,8 +43,7 @@
             </div>
             <div class="form-group col-md-6 col-sm-6">
               {{ form.city_from|as_crispy_field }}
-                <!--<p class="">Куда</p>
-                <input type="text" name="adress" id="cityto" class="form-control"  required=""/>-->
+                
 
                 <div class="form-check form-check-inline">
                     <input type="radio" class="form-check-input" id="addressTo" name="inlineMaterialRadiosExample2" onclick="radioCheckTo()">
@@ -67,48 +65,19 @@
         <div class="row mb-3">
             <div class="form-group col-md-6 col-sm-6">
               {{ form.date_cargo|as_crispy_field }}
-                <!--<p class="">Дата забора груза</p>
-                <input type="date" class="form-control" required="" value="{{ orderconsignment.date_cargo}}" />-->
+               
             </div>
             <div class="form-group col-md-6 col-sm-6">
               {{ form.type_transporation|as_crispy_field }}
-                <!--<p class="">Вид перевозки</p>
-                <select class="form-control" aria-label="Default select example">
-                    <option value="Стандарт">Стандарт</option>
-                    <option value="Экспресс">Экспресс</option>
-                    <option value="Конверт">Конверт</option>
-                  </select>-->
+                
             </div>
             <div class="form-group col-md-6 col-sm-6">
               {{ form.nature_cargo|as_crispy_field }}
-                <!--<p class="">Характер груза</p>
-                <input type="text" class="form-control" required=""/>-->
+               
             </div>
 
             <div class="form-group col-md-6 col-sm-6">
               {{ form.interval|as_crispy_field }}
-                <!--<ul class="nav nav-tabs justify-content-center">
-                    <li class="nav-item">
-                      <a class="nav-link active" style="color: #007041;" data-toggle="tab" href="#morning">Утренний интервал</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" style="color: #007041;" data-toggle="tab" href="#day">Дневной интервал</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" style="color: #007041;" data-toggle="tab" href="#evening">Вечерний интервал</a>
-                    </li>
-                  </ul>
-                  <div class="tab-content p-3">
-                    <div class="tab-pane fade show active" id="morning">
-                      <p>9:00 - 18:00</p>
-                    </div>
-                    <div class="tab-pane fade" id="day">
-                        <p>12:00 - 21:00</p>
-                    </div>
-                    <div class="tab-pane fade" id="evening">
-                        <p>15:00 - 00:00</p>
-                    </div>
-                  </div>-->
             </div>
 
             <div class="form-group col-md-12 col-sm-6">
@@ -220,24 +189,20 @@
                     <div class="card-body">
                         <div class="form-group col-md-6 col-sm-6">
                           {{ form.declared_value|as_crispy_field }}
-                            <!--<p class="">Объявленная стоимость</p>
-                            <input type="text" name="adress"  class="form-control"  required=""/>-->
+                            
                         </div>
                             <div class="custom-control custom-checkbox">
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.insurance|as_crispy_field }}
-                                    <!--<input type="checkbox" id="additionalServices" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices">Страховка</label>-->
+                                    
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.return_of_accompanying_documents|as_crispy_field }}
-                                    <!--<input type="checkbox" id="additionalServices1" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices1">Возврат сопроводительных документов</label>-->
+                               
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.sending_accompanying_documents|as_crispy_field }}
-                                    <!--<input type="checkbox" id="additionalServices2" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices2">Отправка сопроводительных документов</label>-->
+                                    
                                 </div>
                                 <div class="form-group form-check" id="prr" style="visibility: visible;" onclick="checkPRR()">
                                   {{ form.loading_and_unloading_sender|as_crispy_field }}
@@ -246,8 +211,7 @@
                                     {{ form.floor_sender|as_crispy_field }}
                                     {{ form.carry_sender|as_crispy_field }}
                                   </div>
-                                    <!--<input type="checkbox" id="additionalServices3" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices3">Погрузо-разгрузочные работы у отправителя</label>-->
+                                    
                                 </div>
                                 <div class="form-group form-check" id="prr1" style="visibility: visible;" onclick="checkPRR()">
                                   {{ form.loading_and_unloading_recipient|as_crispy_field }}
@@ -256,56 +220,46 @@
                                     {{ form.floor_recipient|as_crispy_field }}
                                     {{ form.carry_recipient|as_crispy_field }}
                                   </div>
-                                   <!--<input type="checkbox" id="additionalServices4" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices4">Погрузо-разгрузочные работы у получателя</label>-->
+                                   
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.pass_sender_territory|as_crispy_field }}
-                                    <!--<input type="checkbox" id="additionalServices5" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices5">Пропуск на территорию отправителя</label>-->
+                                    
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.registration_for_shipment|as_crispy_field }}
-                                    <!--<input type="checkbox" id="additionalServices6" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices6">Запись на отгрузку</label>-->
+                                    
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.paid_entry_sender_territory|as_crispy_field }}
-                                    <!--<input type="checkbox" id="additionalServices7" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices7">Платный въезд на территорию отправителя</label>-->
+                                    
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.internal_shipment_number|as_crispy_field }}
-                                    <!--<input type="checkbox" id="additionalServices8" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices8">Внутренний номер отгрузки</label>-->
+                                    
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.cod|as_crispy_field }}
                                   <div class="col-md-6 col-sm-6">
                                     {{ form.cod_input|as_crispy_field }}
                                   </div>
-                                    <!--<input type="checkbox" id="additionalServices9" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices9">Наложенный платеж</label>-->
+                                    
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.second_address|as_crispy_field }}
-                                    <!--<input type="checkbox" id="additionalServices10" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices10">Заезд на второй адрес</label>-->
+                                   
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.delivery_confirmation|as_crispy_field }}
-                                    <!--<input type="checkbox" id="additionalServices11" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices11">Подтверждение доставки</label>-->
+                                    
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.power_of_attorney|as_crispy_field }}
-                                    <!--<input type="checkbox" id="additionalServices12" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices12">Доверенность</label>-->
+                                   
                                 </div>
                                 <div class="form-group form-check" style="visibility: visible;">
                                   {{ form.pre_call|as_crispy_field }}
-                                    <!--<input type="checkbox" id="additionalServices14" name="mess" class="custom-control-input"/>
-                                    <label class="custom-control-label" for="additionalServices13">Предварительный звонок</label>-->
+                                    
                                 </div>
                                 </div>
                     </div>
@@ -325,43 +279,35 @@
                         <div class="custom-control custom-checkbox">
                             <div class="form-group form-check" style="visibility: visible;">
                               {{ form.rigid_packaging|as_crispy_field }}
-                                <!--<input type="checkbox" id="packaging" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging">Жесткая упаковка</label>-->
+                                
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
                               {{ form.pallet_board|as_crispy_field }}
-                                <!--<input type="checkbox" id="packaging1" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging1">Паллетный борт</label>-->
+                                
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
                               {{ form.bag|as_crispy_field }}
-                                <!--<input type="checkbox" id="packaging2" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging2">Мешок</label>-->
+                                
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
                               {{ form.cardboard_box|as_crispy_field }}
-                                <!--<input type="checkbox" id="packaging3" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging3">Картонная коробка</label>-->
+                                
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
                               {{ form.pallet|as_crispy_field }}
-                                <!--<input type="checkbox" id="packaging4" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging4">Палет</label>-->
+                                
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
                               {{ form.strapping|as_crispy_field }}
-                                <!--<input type="checkbox" id="packaging5" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging5">Стреппинг</label>-->
+                                
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
                               {{ form.stretch|as_crispy_field }}
-                                <!--<input type="checkbox" id="packaging6" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging6">Стрейч - пленка</label>-->
+                                
                             </div>
                             <div class="form-group form-check" style="visibility: visible;">
                               {{ form.air_bubble|as_crispy_field }}
-                                <!--<input type="checkbox" id="packaging7" name="mess" class="custom-control-input"/>
-                                <label class="custom-control-label" for="packaging7">Воздушно - пузырьковая пленка</label>-->
+                                
                             </div>
                            
                             </div>
@@ -394,13 +340,10 @@
                                           
                                           <div style="display: none;" id="individualYes" >
                                             {{ form.fio_individual|as_crispy_field }}
+                                            {{ form.documents|as_crispy_field }}
                                             {{ form.passport_individual|as_crispy_field }}
                                             {{ form.email_individual|as_crispy_field }}
                                             {{ form.phone_individual|as_crispy_field }}
-                                            <!--<input  type="text"  class="form-control" placeholder="ФИО"  required=""/> </p>
-                                            <input  type="text"  class="form-control" placeholder="Серия и номер паспорта"/> </p>
-                                            <input  type="email"  class="form-control" placeholder="Email"/> </p>
-                                            <input  type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>-->
                                           </div>
 
                                           <div style="display: none;" id="entityYes" >
@@ -409,11 +352,7 @@
                                             {{ form.contact_person_entity|as_crispy_field }}
                                             {{ form.email_entity|as_crispy_field }}
                                             {{ form.phone_entity|as_crispy_field }}
-                                            <!--<input  type="text"    class="form-control" placeholder="Название компании"  required=""/> </p>
-                                            <input  type="text"   class="form-control" placeholder="ИНН"  required=""/> </p>
-                                            <input  type="text"    class="form-control" placeholder="Контактное лицо"/> </p>
-                                            <input  type="email"   class="form-control" placeholder="Email"  required=""/> </p>
-                                            <input type="tel"     class="form-control" placeholder="Контактный телефон"  required=""/> </p>-->
+                                           
                                           </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 text-center">
@@ -431,13 +370,11 @@
 
                                       <div style="display: none;" id="individualYes1">
                                         {{ form.fio_individual|as_crispy_field }}
+                                        {{ form.documents|as_crispy_field }}
                                         {{ form.passport_individual|as_crispy_field }}
                                         {{ form.email_individual|as_crispy_field }}
                                         {{ form.phone_individual|as_crispy_field }}
-                                        <!--<input  type="text"  class="form-control" placeholder="ФИО"  required=""/> </p>
-                                        <input  type="text"  class="form-control" placeholder="Серия и номер паспорта"/> </p>
-                                        <input  type="email" class="form-control" placeholder="Email"/> </p>
-                                        <input  type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>-->
+                                        
                                       </div>
 
                                       <div style="display: none;" id="entityYes1" >
@@ -446,11 +383,7 @@
                                         {{ form.contact_person_entity|as_crispy_field }}
                                         {{ form.email_entity|as_crispy_field }}
                                         {{ form.phone_entity|as_crispy_field }}
-                                        <!--<input  type="text"   class="form-control" placeholder="Название компании"  required=""/> </p>
-                                        <input  type="text"    class="form-control" placeholder="ИНН"  required=""/> </p>
-                                        <input  type="text"    class="form-control" placeholder="Контактное лицо"/> </p>
-                                        <input  type="email"    class="form-control" placeholder="Email"  required=""/> </p>
-                                        <input  type="tel"   class="form-control" placeholder="Контактный телефон"  required=""/> </p>-->
+                                        
                                       </div>
 
                                 </div>
@@ -471,7 +404,7 @@
                                   </div>
                                 </div>
                                   <div style="display: none;" id="thirdPYes">
-                                    {{ form.third_person|as_crispy_field }} 
+                                    {{ form.third_person_input_payer|as_crispy_field }} 
                                   </div> 
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 text-center">
@@ -492,8 +425,9 @@
                                       </div> 
                                     </div>
                                       <div style="display: none;" id="thirdP1Yes" >
-                                        {{ form.third_person|as_crispy_field }} 
+                                        {{ form.third_person_input_customer|as_crispy_field }} 
                                       </div> 
+                                      
                                     </div>
                                     <div class="form-group col-md-6 col-sm-6">
                                       {{ form.pay_cargo|as_crispy_field }}

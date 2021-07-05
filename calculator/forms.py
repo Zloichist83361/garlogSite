@@ -1,5 +1,4 @@
 from django import forms
-from django.forms import widgets
 from calculator.models import Calculate, Term
 
 class CalcForm(forms.ModelForm):

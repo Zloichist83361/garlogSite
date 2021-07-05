@@ -1,6 +1,4 @@
-
 from django.shortcuts import redirect, render
-
 
 from order.forms import OrderForm
 

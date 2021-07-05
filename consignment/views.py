@@ -6,8 +6,8 @@ from rest_framework import status
 from rest_framework.parsers import JSONParser 
 from rest_framework.decorators import api_view
 
-from .models import TrackStatusConsignment, OrderConsignment, OrderStatusConsignment, Cities
-from .serializers import TrackStatusConsignmentSerializer, OrderConsignmentSerializer, OrderStatusConsignmentSerializer, CitiesSerializer
+from consignment.models import TrackStatusConsignment, OrderConsignment, OrderStatusConsignment, Cities
+from consignment.serializers import TrackStatusConsignmentSerializer, OrderConsignmentSerializer, OrderStatusConsignmentSerializer, CitiesSerializer
 
 
 @api_view(['GET', 'DELETE'])
@@ -106,18 +106,3 @@ def add_cities(request):
     elif request.method == 'DELETE':
         count = Cities.objects.all().delete()
         return JsonResponse({'message': '{} Заявки были успешно удалены!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
-
-
-def db(request):
-    queryset_track = TrackStatusConsignment.objects.all()
-    queryset_order = OrderConsignment.objects.all()
-    queryset_orderStatus = OrderStatusConsignment.objects.all()
-    queryset_cities = Cities.objects.all()
-    context = {
-        'tracks': queryset_track,
-        'orders': queryset_order,
-        'orderstatuss': queryset_orderStatus,
-        'cities': queryset_cities,
-    }
-    
-    return render(request, 'db.html', context)

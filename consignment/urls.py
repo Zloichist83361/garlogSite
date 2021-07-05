@@ -2,7 +2,6 @@ from django.urls import path, re_path
 
 from consignment import views
 
-from consignment.views import db
 
 urlpatterns = [
     path('api/consignment_create_track', views.create_consignment_trackstatus), #POST track
@@ -11,6 +10,4 @@ urlpatterns = [
     path('api/consignment_create_order', views.create_consignment_orderstatus), #POST order
     re_path('api/consignment_order/(?P<pk>[0-9]+)', views.consignment_detail_orderstatus), #PUT order
     path('api/add_cities', views.add_cities),
-
-    path('db/', db, name='db'),
 ]

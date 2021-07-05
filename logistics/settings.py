@@ -10,10 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from pathlib import Path
+
+from sentry_sdk.integrations.django import DjangoIntegration
+
 import os
 import sentry_sdk
-from sentry_sdk import integrations
-from sentry_sdk.integrations.django import DjangoIntegration
 
 
 sentry_sdk.init(
@@ -36,7 +37,7 @@ SECRET_KEY = 'django-insecure-%x-07l91p&hm0ff3nh%8cyojdzw)4mqcfl=@no9pj62&oj%@(r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['f6eb79e4b1d3.ngrok.io']
+ALLOWED_HOSTS = ['8516a5d9b0d5.ngrok.io']
 
 # Application definition
 
@@ -56,7 +57,6 @@ INSTALLED_APPS = [
     'common.apps.CommonConfig',
     'consignment.apps.ConsignmentConfig',
     'calculator.apps.CalculatorConfig',
-    'contacts.apps.ContactsConfig',
     'news.apps.NewsConfig',
     'office.apps.OfficeConfig',
     'personal_profile.apps.PersonalProfileConfig',

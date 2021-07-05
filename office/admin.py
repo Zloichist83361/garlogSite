@@ -5,6 +5,7 @@ from django.contrib.flatpages.models import FlatPage
 from django.db import models
 
 from .models import Office
+
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 # Register your models here.
 
@@ -23,11 +24,13 @@ class OfficeAdminForm(forms.ModelForm):
         model = Office
         fields = '__all__'
 
+
 class OfficeAdmin(admin.ModelAdmin):
     list_display = ('city', 'text')
     form = OfficeAdminForm
     list_filter = ("city",)
     search_fields = ['city', 'text']
+
 
 admin.site.register(Office, OfficeAdmin)
 admin.site.unregister(FlatPage)
