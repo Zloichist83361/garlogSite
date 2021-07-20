@@ -1,3 +1,4 @@
+from enum import unique
 from django import forms
 
 from consignment.models import  OrderConsignment

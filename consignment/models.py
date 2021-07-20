@@ -58,7 +58,15 @@ class OrderConsignment(models.Model):
         ('Военный билет', 'Военный билет'),
         ('Водительское удостоверение', 'Водительское удостоверение'),
     )
-
+    PERSON = (
+        ('Отправитель', 'Отправитель'),
+        ('Получатель', 'Получатель'),
+        ('Третье лицо', 'Третье лицо'),
+    )
+    SUM = (
+        ('По чеку на адресе', 'По чеку на адресе'),
+        ('Включить в счет', 'Включить в счет'),
+    )
     city_to = models.CharField(verbose_name='Откуда', max_length=255, blank=False, unique=True)
     city_from = models.CharField(verbose_name='Куда', max_length=255, blank=False, unique=True)
     address_from = models.CharField(verbose_name='Адрес*', max_length=255, blank=True, null=True)
@@ -66,7 +74,7 @@ class OrderConsignment(models.Model):
     address_to = models.CharField(verbose_name='Адрес*', max_length=255, blank=True, null=True)
     terminal_to = models.CharField(verbose_name='Терминал*', max_length=255, blank=True, null=True)
     date_cargo = models.DateField('Дата забора груза')
-    type_transporation = models.CharField(verbose_name='Вид перевозки',choices=TYPE_TRANS, max_length=50)
+    type_transporation = models.CharField(verbose_name='Вид перевозки',choices=TYPE_TRANS, max_length=50, default='Стандарт')
     nature_cargo = models.CharField(verbose_name='Характер груза', max_length=255, blank=False)
     #интервал
     interval = models.CharField(verbose_name='Интервал доставки', choices=INTERVAL, max_length=50)
@@ -104,15 +112,24 @@ class OrderConsignment(models.Model):
     floor_recipient = models.IntegerField(verbose_name='Поднятие(этаж)', blank=True, null=True)
     carry_recipient = models.DecimalField(verbose_name='Пронос(м)', max_digits=5, decimal_places=2, blank=True, null=True)
     pass_sender_territory = models.BooleanField(verbose_name='Пропуск на территорию отправителя')
+    order_per_hour = models.BooleanField(verbose_name='Заказать за час', default='')
+    order_per_day = models.BooleanField(verbose_name='Заказать за сутки', default='')
     registration_for_shipment = models.BooleanField(verbose_name='Запись на отгрузку')
     paid_entry_sender_territory = models.BooleanField(verbose_name='Платный въезд на территорию отправителя')
+    sum = models.DecimalField(verbose_name='Сумма', max_digits=5, decimal_places=2, blank=True, null=True)
+    reimbursement_method = models.CharField(verbose_name='Способ возмещения суммы', choices=SUM, max_length=50, default='', blank=True, null=True)
     internal_shipment_number = models.BooleanField(verbose_name='Внутренний номер отгрузки')
+    info_internal_shipment_number = models.CharField(verbose_name='', max_length=255, blank=True, null=True)
     cod = models.BooleanField(verbose_name='Наложенный платеж')
     cod_input = models.DecimalField(verbose_name='Сумма наложенного платежа', max_digits=5, decimal_places=2, blank=True, null=True)
     second_address = models.BooleanField(verbose_name='Заезд на второй адрес')
+    check_second_address= models.CharField(verbose_name='Город и адрес', max_length=255, blank=True, null=True)
     delivery_confirmation = models.BooleanField(verbose_name='Подтверждение доставки')
     power_of_attorney = models.BooleanField(verbose_name='Доверенность')
+    info_proxy = models.CharField(verbose_name='', max_length=255, blank=True, null=True)
     pre_call = models.BooleanField(verbose_name='Предварительный звонок')
+    callback_one_hour = models.BooleanField(verbose_name='Отзвон за 1 час', default='')
+    callback_two_hour = models.BooleanField(verbose_name='Отзвон за 2 час', default='')
     #упаковка груза
     rigid_packaging = models.BooleanField(verbose_name='Жесткая упаковка')
     pallet_board = models.BooleanField(verbose_name='Паллетный борт')
