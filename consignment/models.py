@@ -77,7 +77,7 @@ class OrderConsignment(models.Model):
     type_transporation = models.CharField(verbose_name='Вид перевозки',choices=TYPE_TRANS, max_length=50, default='Стандарт')
     nature_cargo = models.CharField(verbose_name='Характер груза', max_length=255, blank=False)
     #интервал
-    interval = models.CharField(verbose_name='Интервал доставки', choices=INTERVAL, max_length=50)
+    interval = models.CharField(verbose_name='Интервал доставки', choices=INTERVAL, max_length=50, default='9:00 - 18:00')
     #1место
     length_one = models.DecimalField(verbose_name='Длина(м)*', max_digits=5, decimal_places=2, blank=True, null=True, default='0.1')
     width_one = models.DecimalField(verbose_name='Ширина(м)*', max_digits=5, decimal_places=2, blank=True, null=True, default='0.1')
