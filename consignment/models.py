@@ -162,7 +162,7 @@ class OrderConsignment(models.Model):
     third_person_input_payer = models.CharField(verbose_name='Город, имя, телефон*', max_length=300, blank=True, null=True)
     third_person_input_customer = models.CharField(verbose_name='Город, имя, телефон*', max_length=300, blank=True, null=True)
     pay_cargo = models.CharField(verbose_name='Форма оплаты', choices=PAY, max_length=50)
-
+    comment = models.CharField(verbose_name='Комментарий', max_length=10000, blank=True, null=True)
 
 class OrderStatusConsignment(models.Model):
     STATUS_CHOICES = (

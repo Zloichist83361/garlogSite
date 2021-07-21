@@ -1,5 +1,6 @@
 from enum import unique
 from django import forms
+from django.forms.widgets import Textarea
 
 from consignment.models import  OrderConsignment
 
@@ -13,5 +14,5 @@ class OrderForm(forms.ModelForm):
         model = OrderConsignment
         fields = '__all__'   
         widgets = {
-            'date_cargo': DateInput()
+            'date_cargo': DateInput(), 'comment': Textarea()
         }

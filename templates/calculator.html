@@ -105,7 +105,7 @@
 
       if (cityto != '' && cityfrom != '' && quantity != '' && weight != '' && volume != ''){
         req.onload = function(){
-          let res_calc = JSON.parse(this.responseText);
+          let res_calc = JSON.stringify(this.responseText);
           if (res_calc.inter_terminal){
             st_full = 0;
             ex_full = 0;
