@@ -401,12 +401,13 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 text-center">
                                     <p class="font-weight-bold">Плательщик</p>
-                                <div class="btn-group btn-group-toggle" data-toggle="checkbox">                                    
+                                <div class="btn-group btn-group-toggle" data-toggle="checkbox" >
+                                    <div class="FirstP">
                                       {{ form.sender_payer|as_crispy_field }} 
-                                      &nbsp;   
-                                      &nbsp;                               
+                                      &nbsp;   </div>
+                                      &nbsp;      <div class="SecondP">
                                       {{ form.recipient_payer|as_crispy_field }}  
-                                      &nbsp;       
+                                      &nbsp;    </div>
                                       &nbsp;     
                                       <div class="form-check">             
                                         <input type="checkbox" class="checkboxinput form-check-input" id="thirdP" onclick="check()">
@@ -598,6 +599,10 @@
             document.getElementById('call').style.display = 'block';
         }
         else document.getElementById('call').style.display = 'none';
+    }
+
+    id_declared_value.oninput = function () {
+        document.getElementById('id_insurance').checked = true;
     }
     </script>
 {% endblock %}
