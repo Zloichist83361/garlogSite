@@ -204,27 +204,25 @@
                                   {{ form.sending_accompanying_documents|as_crispy_field }}
                                     
                                 </div>
-                                <div class="form-group form-check" id="prr" style="visibility: visible;">
+                                <div class="form-group form-check" id="prr" style="visibility: visible;" onclick="checkPRR()">
                                   {{ form.loading_and_unloading_sender|as_crispy_field }}
-                                  <div class="col-md-6 col-sm-6" id="prrYes"> 
+                                  <div class="col-md-6 col-sm-6" id="prrYes" style="display: none">
                                     {{ form.service_lift_sender|as_crispy_field }}
                                     {{ form.floor_sender|as_crispy_field }}
                                     {{ form.carry_sender|as_crispy_field }}
                                   </div>
-                                    
                                 </div>
-                                <div class="form-group form-check" id="prr1" style="visibility: visible;">
+                                <div class="form-group form-check" id="prr1" style="visibility: visible;" onclick="checkPRR_r()">
                                   {{ form.loading_and_unloading_recipient|as_crispy_field }}
-                                  <div class="col-md-6 col-sm-6"  id="prr1Yes">
+                                  <div class="col-md-6 col-sm-6"  id="prr1Yes" style="display: none">
                                     {{ form.service_lift_recipient|as_crispy_field }}
                                     {{ form.floor_recipient|as_crispy_field }}
                                     {{ form.carry_recipient|as_crispy_field }}
                                   </div>
-                                   
                                 </div>
-                                <div class="form-group form-check" style="visibility: visible;">
+                                <div class="form-group form-check" style="visibility: visible;" onclick="checkPass()">
                                   {{ form.pass_sender_territory|as_crispy_field }}
-                                  <div class="col-md-6 col-sm-6">
+                                  <div class="col-md-6 col-sm-6" id="pass" style="display: none">
                                     {{ form.order_per_hour|as_crispy_field }}
                                     {{ form.order_per_day|as_crispy_field }}
                                   </div>
@@ -233,29 +231,29 @@
                                   {{ form.registration_for_shipment|as_crispy_field }}
                                     
                                 </div>
-                                <div class="form-group form-check" style="visibility: visible;">
+                                <div class="form-group form-check" style="visibility: visible;" onclick="checkPaid()">
                                   {{ form.paid_entry_sender_territory|as_crispy_field }}
-                                  <div class="col-md-6 col-sm-6">
+                                  <div class="col-md-6 col-sm-6" id="paid" style="display: none">
                                     {{ form.sum|as_crispy_field }}
                                     {{ form.reimbursement_method|as_crispy_field }}
                                   </div>
                                 </div>
-                                <div class="form-group form-check" style="visibility: visible;">
+                                <div class="form-group form-check" style="visibility: visible;" onclick="checkInternal()">
                                   {{ form.internal_shipment_number|as_crispy_field }}
-                                  <div class="col-md-6 col-sm-6">
+                                  <div class="col-md-6 col-sm-6" id="internal" style="display: none">
                                     {{ form.info_internal_shipment_number|as_crispy_field }}
                                   </div>
                                 </div>
-                                <div class="form-group form-check" style="visibility: visible;">
+                                <div class="form-group form-check" style="visibility: visible;" onclick="checkCOD()">
                                   {{ form.cod|as_crispy_field }}
-                                  <div class="col-md-6 col-sm-6">
+                                  <div class="col-md-6 col-sm-6" id="cod" style="display: none">
                                     {{ form.cod_input|as_crispy_field }}
                                   </div>
                                     
                                 </div>
-                                <div class="form-group form-check" style="visibility: visible;">
+                                <div class="form-group form-check" style="visibility: visible;" onclick="checkSecond()">
                                   {{ form.second_address|as_crispy_field }}
-                                  <div class="col-md-6 col-sm-6">
+                                  <div class="col-md-6 col-sm-6" id="second" style="display: none">
                                     {{ form.check_second_address|as_crispy_field }}
                                   </div>
                                 </div>
@@ -263,15 +261,15 @@
                                   {{ form.delivery_confirmation|as_crispy_field }}
                                     
                                 </div>
-                                <div class="form-group form-check" style="visibility: visible;">
+                                <div class="form-group form-check" style="visibility: visible;" onclick="checkPower()">
                                   {{ form.power_of_attorney|as_crispy_field }}
-                                  <div class="col-md-6 col-sm-6">
+                                  <div class="col-md-6 col-sm-6" id="power" style="display: none">
                                     {{ form.info_proxy|as_crispy_field }}
                                   </div>
                                 </div>
-                                <div class="form-group form-check" style="visibility: visible;">
+                                <div class="form-group form-check" style="visibility: visible;" onclick="checkCall()">
                                   {{ form.pre_call|as_crispy_field }}
-                                  <div class="col-md-6 col-sm-6">
+                                  <div class="col-md-6 col-sm-6" id="call" style="display: none">
                                     {{ form.callback_one_hour|as_crispy_field }}
                                     {{ form.callback_two_hour|as_crispy_field }}
                                   </div>
@@ -545,6 +543,61 @@
         document.getElementById('thirdP1Yes').style.display = 'block';
       }
       else document.getElementById('thirdP1Yes').style.display = 'none';
+    }
+
+    function checkPRR() {
+        if (document.getElementById('id_loading_and_unloading_sender').checked) {
+            document.getElementById('prrYes').style.display = 'block';
+        }
+        else document.getElementById('prrYes').style.display = 'none';
+    }
+    function checkPRR_r() {
+        if (document.getElementById('id_loading_and_unloading_recipient').checked) {
+            document.getElementById('prr1Yes').style.display = 'block';
+        }
+        else document.getElementById('prr1Yes').style.display = 'none';
+    }
+    function checkPass() {
+        if (document.getElementById('id_pass_sender_territory').checked) {
+            document.getElementById('pass').style.display = 'block';
+        }
+        else document.getElementById('pass').style.display = 'none';
+    }
+    function checkPaid() {
+        if (document.getElementById('id_paid_entry_sender_territory').checked) {
+            document.getElementById('paid').style.display = 'block';
+        }
+        else document.getElementById('paid').style.display = 'none';
+    }
+    function checkInternal() {
+        if (document.getElementById('id_internal_shipment_number').checked) {
+            document.getElementById('internal').style.display = 'block';
+        }
+        else document.getElementById('internal').style.display = 'none';
+    }
+    function checkCOD() {
+        if (document.getElementById('id_cod').checked) {
+            document.getElementById('cod').style.display = 'block';
+        }
+        else document.getElementById('cod').style.display = 'none';
+    }
+    function checkSecond() {
+        if (document.getElementById('id_second_address').checked) {
+            document.getElementById('second').style.display = 'block';
+        }
+        else document.getElementById('second').style.display = 'none';
+    }
+    function checkPower() {
+        if (document.getElementById('id_power_of_attorney').checked) {
+            document.getElementById('power').style.display = 'block';
+        }
+        else document.getElementById('power').style.display = 'none';
+    }
+    function checkCall() {
+        if (document.getElementById('id_pre_call').checked) {
+            document.getElementById('call').style.display = 'block';
+        }
+        else document.getElementById('call').style.display = 'none';
     }
     </script>
 {% endblock %}

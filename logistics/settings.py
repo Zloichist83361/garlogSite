@@ -110,8 +110,8 @@ WSGI_APPLICATION = 'logistics.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myprojectfinal', 
-        'USER': 'myprojectuser1', 
+        'NAME': 'db_garlog',
+        'USER': 'postgres',
         'PASSWORD': 'password1',
         'HOST': '127.0.0.1', 
         'PORT': '5432',
