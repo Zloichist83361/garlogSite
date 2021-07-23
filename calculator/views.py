@@ -19,6 +19,7 @@ def calc(request):
     
     return render(request, 'calculator.html', context)
 
+
 def calc_post(request):
     struct = request.POST.get('struct')
     weight = float(struct[3])

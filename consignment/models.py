@@ -99,7 +99,7 @@ class OrderConsignment(models.Model):
     document_height = models.DecimalField(verbose_name='Высота(см)*', max_digits=5, decimal_places=2, validators=[MaxValueValidator(4)], blank=True, null=True, default='3')
     document_weight =  models.DecimalField(verbose_name='Вес(кг)*', max_digits=5, decimal_places=2, validators=[MaxValueValidator(2)], blank=True, null=True, default='2')
     #доп услуги
-    declared_value = models.DecimalField(verbose_name='Объявленная стоимость*', max_digits=5, decimal_places=2, blank=True, null=True)
+    declared_value = models.DecimalField(verbose_name='Объявленная стоимость*', max_digits=5, decimal_places=2, blank=True, null=True, default='0')
     insurance = models.BooleanField(verbose_name='Страховка')
     return_of_accompanying_documents = models.BooleanField(verbose_name='Возврат сопроводительных документов')
     sending_accompanying_documents = models.BooleanField(verbose_name='Отправка сопроводительных документов')

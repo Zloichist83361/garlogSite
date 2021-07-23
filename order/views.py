@@ -4,6 +4,7 @@ from order.forms import OrderForm
 
 # Create your views here.
 
+
 def order(request):
     form = OrderForm()
     if request.method == "POST":
@@ -11,7 +12,7 @@ def order(request):
         if form.is_valid():
             form.save()
             return redirect('thanks')
-    return render(request, 'order.html', {'form':form})
+    return render(request, 'order.html', {'form': form})
 
 
 def thanks(request):
@@ -19,4 +20,3 @@ def thanks(request):
          'is_worker': request.user.groups.filter(name='worker').exists(),
     }
     return render(request, 'thanks.html', context)
-

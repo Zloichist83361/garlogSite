@@ -143,17 +143,17 @@
                             <div class="col-md-3 col-sm-6">
                               {{ form.some_hardest|as_crispy_field }}
                             </div>
-                            <div class="col-md-3 col-sm-6">
-                              <br>                
-                                <a href="#" style="color: red;" data-mdb-toggle="tooltip" title="Грузовое место считается негабаритным,если 
-  - вес места не менее 500 кг или 
-  - одно из измерений равно или более 3 метров">(!)Негабарит</a>
+                            <div class="col-md-3 col-sm-6 text-center">
+                                <br>
+                                <a href="#" class="font-weight-bold" data-toggle="tooltip" style="color: red" title="Грузовое место считается негабаритным, если вес места не менее 500 кг или одно из измерений равно или более 3 метров">(!)Негабарит</a>
                             </div>
                             </div>
                          
                     </div>
                     <div class="tab-pane fade" id="documentation">
-                      
+                        <div class="alert alert-warning" role="alert">
+                                В случае превышения данных по умолчанию, воспользуйтесь формой &nbsp;"1 место" !
+                        </div>
                             <div class="row">
                               <div class="col-md-6 col-sm-6 ">
                                 {{ form.document_length|as_crispy_field }}
@@ -164,7 +164,6 @@
                               <div class="col-md-6 col-sm-6">
                                 {{ form.document_height|as_crispy_field }}
                             </div>
-                        
                             <div class="col-md-6 col-sm-6 ">
                               {{ form.document_weight|as_crispy_field }}
                             </div>
@@ -189,7 +188,6 @@
                     <div class="card-body">
                         <div class="form-group col-md-6 col-sm-6">
                           {{ form.declared_value|as_crispy_field }}
-                            
                         </div>
                             <div class="custom-control custom-checkbox">
                                 <div class="form-group form-check" style="visibility: visible;">
@@ -401,21 +399,21 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 text-center">
                                     <p class="font-weight-bold">Плательщик</p>
-                                <div class="btn-group btn-group-toggle" data-toggle="checkbox" >
-                                    <div class="FirstP">
-                                      {{ form.sender_payer|as_crispy_field }} 
-                                      &nbsp;   </div>
-                                      &nbsp;      <div class="SecondP">
-                                      {{ form.recipient_payer|as_crispy_field }}  
-                                      &nbsp;    </div>
-                                      &nbsp;     
-                                      <div class="form-check">             
-                                        <input type="checkbox" class="checkboxinput form-check-input" id="thirdP" onclick="check()">
-                                      <label for="thirdP" class="form-check-label">
-                                        Третье лицо
-                                      </label>                                        
-                                  </div>
-                                </div>
+                                <div class="btn-group btn-group-toggle" data-toggle="checkbox">
+                                      {{ form.sender_payer|as_crispy_field }}
+                                      &nbsp;
+                                      &nbsp;
+                                      {{ form.recipient_payer|as_crispy_field }}
+                                      &nbsp;
+                                      &nbsp;
+                                        <div class="form-check">
+                                          <input type="checkbox" class="as checkboxinput form-check-input" id="thirdP" onclick="check()">
+                                        <label for="thirdP" class="form-check-label">
+                                          Третье лицо
+                                        </label>
+
+                                      </div>
+                                    </div>
                                   <div style="display: none;" id="thirdPYes">
                                     {{ form.third_person_input_payer|as_crispy_field }} 
                                   </div> 
@@ -430,7 +428,7 @@
                                       &nbsp;
                                       &nbsp;     
                                         <div class="form-check">             
-                                          <input type="checkbox" class="checkboxinput form-check-input" id="thirdP1" onclick="check()">
+                                          <input type="checkbox" class="as1 checkboxinput form-check-input" id="thirdP1" onclick="check()">
                                         <label for="thirdP1" class="form-check-label">
                                           Третье лицо
                                         </label>                              
@@ -462,12 +460,19 @@
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">Расчет</h5>
-        <p class="card-text">Забор груза </p>
-        <p class="card-text">Межтерминальная перевозка </p>
+        <p class="card-text">Забор груза &nbsp;&nbsp;&nbsp;&nbsp;<strong id="cargo"></strong></p>
+        <p class="card-text" id="inter">Межтерминальная перевозка </p>
         <p class="card-text">Страхование </p>
+          <p class="card-text" style="display: none">Возврат сопроводительных документов </p>
+          <p class="card-text" style="display: none">Отправка сопроводительных документов </p>
+          <p class="card-text" style="display: none">Погрузо-разгрузочные работы у отправителя </p>
+          <p class="card-text" style="display: none">Погрузо-разгрузочные работы у получателя </p>
+          <p class="card-text" style="display: none">Коммиссия наложенного платежа </p>
+          <p class="card-text" style="display: none">Подтверждение доставки </p>
         <h5 class="card-title">Сроки</h5>
-        <p class="card-text">Стандарт </p>
-        <p class="card-text">Экспресс  </p>
+        <p class="card-text">Стандарт &nbsp;&nbsp;&nbsp;&nbsp;<strong>3 дня</strong></p>
+        <p class="card-text">Экспресс &nbsp;&nbsp;&nbsp;&nbsp;<strong>2 дня</strong></p>
+          <h5 class="card-title">Общая стоимость</h5>
       </div>
     </div>
     </div>
@@ -476,6 +481,10 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script type="text/javascript">
+
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
 
     function radioCheck() {
         if (document.getElementById('address').checked) {
@@ -487,8 +496,6 @@
             document.getElementById('termYes').style.display = 'block';
         }
         else document.getElementById('termYes').style.display = 'none';
-
-
     }
 
     function radioCheckTo() {
@@ -515,8 +522,6 @@
             document.getElementById('entityYes').style.display = 'block';
         }
         else document.getElementById('entityYes').style.display = 'none';
-
-
     }
 
     function radioCheckFaceTo() {
@@ -602,7 +607,15 @@
     }
 
     id_declared_value.oninput = function () {
-        document.getElementById('id_insurance').checked = true;
+       document.getElementById('id_insurance').checked = true;
     }
+
+    $('input.as').on('change', function () {
+        $('input.as').not(this).prop('checked', false);
+    });
+
+    $('input.as1').on('change', function () {
+        $('input.as1').not(this).prop('checked', false);
+    });
     </script>
 {% endblock %}
