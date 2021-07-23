@@ -481,10 +481,31 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <script type="text/javascript">
+    let cityto = document.querySelector('#id_city_to'),
+        cityfrom = document.querySelector('#id_city_from'),
+        weightto = document.querySelector('#id_weight_one'),
+        weightfrom = document.querySelector('#id_volume_one');
+
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        processData: false,
+        data: JSON.stringify({'cityto': cityto, 'cityfrom': cityfrom, 'weightto': weightto, 'weightfrom': weightfrom}),
+
+    });
+
+    let my_data = '{{ my_data }}',
+        cargo = document.querySelector('#cargo'),
+        weightto_a = document.querySelector('#id_weight_one'),
+        weightfrom_a = document.querySelector('#id_volume_one');
+
+        weightto_a.oninput = function () {
+            cargo.innerHTML = my_data
+        };
 
     $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 
     function radioCheck() {
         if (document.getElementById('address').checked) {
